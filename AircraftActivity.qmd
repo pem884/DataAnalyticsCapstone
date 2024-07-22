@@ -21,7 +21,7 @@ library(svgPanZoom)
 
 ```
 
-# Import complaints from Airnoise.io
+## Import complaints from Airnoise.io
 
 Export the complaint database from airnoise.io in CSV format. If it is zipped, it can remain so because `readr::read_csv()` handles that for us.
 
@@ -410,6 +410,22 @@ airnoiseComplaints <-
   )
 ```
 
+```{r}
+
+  
+  
+filterPlaneDetections <- reactive({
+  planeDetections %>%
+    filter(between(startDateTime,
+                    left=ymd(input$dates[1]),
+                    right=ymd(input$dates[2])
+                    )
+            )
+  })
+
+  
+```
+
 # Visualize traffic by number of observations
 
 ```{r Visualize-traffic-by-number-of-observations}
@@ -615,30 +631,20 @@ pltComplaintsByAirportOfInterest <- ggplot(
 
 # Construct a dashboard
 
-## Set up cards and panels
+# {.sidebar}
+```{r Shiny-UI}
 
-```{r Shiny-cards-panels}
+# ui <- shinyUI(bootstrapPage(
+#   svgPanZoomOutput(outputId = "main_plot")
+# ))
 
-cards <- list(
-  card(
-    full_screen = TRUE,
-    card_header("Number of Sightings by Operator"),
-    plotOutput("pltTrafficByNumberOfObservations")
-  ),
-  card(
-    full_screen = TRUE,
-    card_header("# Complaints by Base Airport"),
-    plotOutput("pltTrafficByBaseAirport")
-  ),
-  card(
-    full_screen = TRUE,
-    card_header("# Sightings by Origin or Destination Airport"),
-    plotOutput("pltComplaintsByAirportOfInterest")
-  )
-)
+# ui <- page_sidebar( # Shiny, not Quarto
 
-navpanels <- list(
-  nav_panel("Number of Sightings by Operator",
+# title = "Analysis of AirNoise.io Noise Complaints East of Solberg Airport (N51) in NJ",
+# sidebar = sidebar(
+#   "Sidebar Text for your Sidebar"),
+navset_underline(
+  nav_panel("Number of Sightings by Operator Navpanel",
             plotOutput("pltTrafficByNumberOfObservations")
             ),
   nav_panel("# Complaints by Base Airport",
@@ -646,75 +652,53 @@ navpanels <- list(
             ),
   nav_panel("# Sightings by Origin or Destination Airport",
             plotOutput("pltComplaintsByAirportOfInterest")
-            )
-  )
-
-```
-
-## Build the Shiny UI
-
-```{r Shiny-UI}
-
-# ui <- shinyUI(bootstrapPage(
-#   svgPanZoomOutput(outputId = "main_plot")
-# ))
-ui <- page_sidebar(
-  title = "Analysis of AirNoise.io Noise Complaints East of Solberg Airport (N51) in NJ",
-  sidebar = sidebar(
-    "Sidebar Text for your Sidebar"),
-  navset_underline(!!!navpanels),
-  dateRangeInput("dates",
-                 "Filter observations/complaints by date:",
-                 min = min(airnoiseComplaints$event_date),
-                 max = max(airnoiseComplaints$event_date),
-                 start = min(airnoiseComplaints$event_date),
-                 end = max(airnoiseComplaints$event_date)
-                 ),
-  textOutput("datesAsText")
-  # !!!cards
-  )
+            ))
+dateRangeInput("dates",
+                "Filter observations/complaints by date:",
+                min = min(airnoiseComplaints$event_date),
+                max = max(airnoiseComplaints$event_date),
+                start = min(airnoiseComplaints$event_date),
+                end = max(airnoiseComplaints$event_date)
+                )
+textOutput("datesAsText")
 
 ```
 
 # Define and run the Shiny Server
 
 ```{r Shiny-Server}
+#| context: server
 
-server <- function(input, output) {
-  
-  
-  filterPlaneDetections <- reactive({
-    planeDetections %>%
-      filter(between(startDateTime,
-                     left=ymd(input$dates[1]),
-                     right=ymd(input$dates[2])
-                     )
-             )
-  })
+# server <- function(input, output) { # Shiny, not Quarto
+
   
   #TODO: probably need to move our plotting functionality down into the Server section now?
   
-  output$pltTrafficByNumberOfObservations <- renderPlot({
-    pltTrafficByNumberOfObservations
-    })
-  output$pltTrafficByBaseAirport <- renderPlot({
-    pltTrafficByBaseAirport
-    })
-  output$pltComplaintsByAirportOfInterest <- renderPlot({
-    pltComplaintsByAirportOfInterest
-    })
-  output$datesAsText <- renderText({
-    paste("you have selected", input$dates)
+output$pltTrafficByNumberOfObservations <- renderPlot({
+  pltTrafficByNumberOfObservations
   })
-}
+
+output$pltTrafficByBaseAirport <- renderPlot({
+  pltTrafficByBaseAirport
+  })
+
+output$pltComplaintsByAirportOfInterest <- renderPlot({
+  pltComplaintsByAirportOfInterest
+  })
+
+output$datesAsText <- renderText({
+  paste("you have selected", input$dates)
+  })
+
+# } # Shiny, not Quarto
   
   
-runApp(list(ui=ui,server=server))
+# runApp(list(ui=ui,server=server))
 
 ```
 
 # Plots
-
+<!-- 
 ## Traffic by # of Observations
 
 ```{r Plot-Traffic-By-Number-of-Observations}
@@ -733,14 +717,15 @@ renderPlot({
 
 ## Complaints by Airport of Interest
 ```{r Plot-Complaints-By-Airport-of-Interest}
-output$pltComplaintsByAirportOfInterest <- renderPlot({
+renderPlot({
   pltComplaintsByAirportOfInterest
   })
 ```
 
 ## Dates Input Element
 ```{r Input-dates}
-output$datesAsText <- renderText({
+renderText({
   paste("you have selected", input$dates)
   })
 ```
+ -->
