@@ -615,7 +615,9 @@ pltComplaintsByAirportOfInterest <- ggplot(
 
 # Construct a dashboard
 
-```{r Construct-the-dashboard}
+## Set up cards and panels
+
+```{r Shiny-cards-panels}
 
 cards <- list(
   card(
@@ -647,6 +649,11 @@ navpanels <- list(
             )
   )
 
+```
+
+## Build the Shiny UI
+
+```{r Shiny-UI}
 
 # ui <- shinyUI(bootstrapPage(
 #   svgPanZoomOutput(outputId = "main_plot")
@@ -666,6 +673,12 @@ ui <- page_sidebar(
   textOutput("datesAsText")
   # !!!cards
   )
+
+```
+
+# Define and run the Shiny Server
+
+```{r Shiny-Server}
 
 server <- function(input, output) {
   
@@ -698,4 +711,36 @@ server <- function(input, output) {
   
 runApp(list(ui=ui,server=server))
 
+```
+
+# Plots
+
+## Traffic by # of Observations
+
+```{r Plot-Traffic-By-Number-of-Observations}
+renderPlot({
+  pltTrafficByNumberOfObservations
+  })
+```
+
+## Traffic by Base Airport
+
+```{r Plot-Traffic-By-Base-Airport}
+renderPlot({
+  pltTrafficByBaseAirport
+  })
+```
+
+## Complaints by Airport of Interest
+```{r Plot-Complaints-By-Airport-of-Interest}
+output$pltComplaintsByAirportOfInterest <- renderPlot({
+  pltComplaintsByAirportOfInterest
+  })
+```
+
+## Dates Input Element
+```{r Input-dates}
+output$datesAsText <- renderText({
+  paste("you have selected", input$dates)
+  })
 ```
