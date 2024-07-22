@@ -1,7 +1,7 @@
 ---
 title: "Aircraft Activity"
 author: "Patrick Moore"
-format: html
+format: dashboard
 server: shiny
 ---
 
