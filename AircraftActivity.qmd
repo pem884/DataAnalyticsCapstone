@@ -10,6 +10,7 @@ server: shiny
 We rely on the tidyverse to work with our data and `RCurl` to get a current version of the FAA ownership database.
 
 ```{r setup}
+#| context: setup
 
 library(bslib)
 library(directlabels)
@@ -28,6 +29,7 @@ Export the complaint database from airnoise.io in CSV format. If it is zipped, i
 `anCsvFilesPath` must indicate the path at which the exported database has been saved (the example path is listed in a Windows-friendly format).
 
 ```{r Import-CSV}
+#| context: data
 
 anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-06-24.zip'
 
@@ -42,6 +44,7 @@ The minimum data necessary to gain insights about a given complaint will include
 Some columns include spaces and special characters, so we also clean them by replacing spaces with underscores and removing parentheses.
 
 ```{r Initial-cleaning}
+#| context: data
 
 airnoiseComplaints <- drop_na(airnoiseComplaints, registration)
 
@@ -59,6 +62,7 @@ airnoiseComplaints <- airnoiseComplaints %>%
 Download the FAA registration database if it doesn't exist or is too old. This is helpful to ensure that owners named similarly are indeed the same as one another (to clean misspellings, etc.). The variable `maxAgeDays` is set at 14 initially; this is an arbitrary value. We change the `name` field as it's the name of the principal owner, so `owner` is more specific and will help distinguish from the `operator` name which we'll use in a different way (to show who is believed or likely to be using the aircraft).
 
 ```{r Import-FAA-ownership-data}
+#| context: data
 
 # How old can the file be before it needs to be re-downloaded?
 maxAgeDays <- 14
@@ -187,6 +191,7 @@ getOwners <- function() {
 Our complaints will left join with the ownership data such that, even if there's an issue with the FAA database, we'll still have the complaints - it will just be more difficult (or require a different method) to group observations together by owner.
 
 ```{r Left-join-complaints-with-ownership-data}
+#| context: data
 
 # Join these owner data with the aircraft seen.
 airnoiseComplaints <- left_join(
