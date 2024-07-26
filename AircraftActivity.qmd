@@ -1,16 +1,22 @@
 ---
 title: "Aircraft Activity"
 author: "Patrick Moore"
-format: dashboard
+format:
+  dashboard:
+     theme: darkly # from https://bootswatch.com/
+     orientation: rows
+     expandable: true
+     scrolling: false
+     nav-buttons:
+      - icon: github
+        href: https://github.com/pem884/DataAnalyticsCapstone
 server: shiny
 ---
 
-# Set up environment
-
-We rely on the tidyverse to work with our data and `RCurl` to get a current version of the FAA ownership database.
-
-```{r setup}
+```{r}
 #| context: setup
+#| eval: true
+#| include: false
 
 library(bslib)
 library(directlabels)
@@ -22,14 +28,70 @@ library(svgPanZoom)
 
 ```
 
-## Import complaints from Airnoise.io
 
+# {.sidebar}
+```{r Shiny-UI}
+
+# title = "Analysis of AirNoise.io Noise Complaints East of Solberg Airport (N51) in NJ",
+
+dateRangeInput("dates",
+                "Filter observations/complaints by date:",
+                min = mdy("1/1/2010"),
+                max = Sys.Date(),
+                start = mdy("1/1/2010"),
+                end = Sys.Date()
+               )
+
+# dateRangeInputOriginal("datesOriginal",
+#                 "Filter observations/complaints by date:",
+#                 min = min(airnoiseComplaints$event_date),
+#                 max = max(airnoiseComplaints$event_date),
+#                 start = min(airnoiseComplaints$event_date),
+#                 end = max(airnoiseComplaints$event_date)
+#                )
+
+
+```
+
+# Set up environment {orientation="columns" scrolling="true"}
+
+## Tabset-Setup {.tabset}
+
+### Tab-Libraries {title="I. Libraries"}
+
+:::{.card title="1- Libraries used"}
+We rely on the tidyverse to work with our data and `RCurl` to get a current version of the FAA ownership database.
+
+```{r Env-Setup}
+#| context: setup
+#| eval: false
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: environment setup"
+
+library(bslib)
+library(directlabels)
+library(tidyverse)
+library(RCurl)      # For downloading the FAA database
+library(shiny)      # For interactive plots
+library(svglite)
+library(svgPanZoom)
+
+```
+
+:::
+
+::: {.card title="2- Import complaints from Airnoise.io"}
 Export the complaint database from airnoise.io in CSV format. If it is zipped, it can remain so because `readr::read_csv()` handles that for us.
-
 `anCsvFilesPath` must indicate the path at which the exported database has been saved (the example path is listed in a Windows-friendly format).
 
 ```{r Import-CSV}
 #| context: data
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Import CSV with complaint data"
 
 anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-06-24.zip'
 
@@ -37,32 +99,18 @@ airnoiseComplaints <- read_csv(anCsvFilesPath)
 
 ```
 
-# Preliminary cleaning of complaints
+:::
 
-The minimum data necessary to gain insights about a given complaint will include the registration field, so we drop any row without it.
 
-Some columns include spaces and special characters, so we also clean them by replacing spaces with underscores and removing parentheses.
-
-```{r Initial-cleaning}
-#| context: data
-
-airnoiseComplaints <- drop_na(airnoiseComplaints, registration)
-
-# Repair some badly-named columns
-airnoiseComplaints <- airnoiseComplaints %>%
-  rename_with(
-    ~ tolower(str_replace_all(.x, " ", "_") %>%
-      str_remove_all("[()]"))
-    )
-
-```
-
-# Download and import FAA ownership data
-
+::: {.card title="3- Download & import FAA registration data"}
 Download the FAA registration database if it doesn't exist or is too old. This is helpful to ensure that owners named similarly are indeed the same as one another (to clean misspellings, etc.). The variable `maxAgeDays` is set at 14 initially; this is an arbitrary value. We change the `name` field as it's the name of the principal owner, so `owner` is more specific and will help distinguish from the `operator` name which we'll use in a different way (to show who is believed or likely to be using the aircraft).
 
-```{r Import-FAA-ownership-data}
+```{r Import-FAA-registration-data}
 #| context: data
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Import FAA registration data"
 
 # How old can the file be before it needs to be re-downloaded?
 maxAgeDays <- 14
@@ -186,49 +234,115 @@ getOwners <- function() {
 
 ```
 
-## Join complaint and ownership data
+:::
 
+### Tab-Cleaning-Joining {title="II. Cleaning & joining"}
+
+#### Row
+::: {.card title="1- Preliminary cleaning of complaints"}
+The minimum data necessary to gain insights about a given complaint will include the registration field, so we drop any row without it.
+Some columns include spaces and special characters, so we also clean them by replacing spaces with underscores and removing parentheses.
+
+```{r Initial-cleaning}
+#| context: data
+#| echo: true
+#| output: true
+#| code-fold: show
+#| code-summary: "Code: Cleaning complaint data"
+
+airnoiseComplaints <- drop_na(airnoiseComplaints, registration)
+
+# Repair some badly-named columns
+airnoiseComplaints <- airnoiseComplaints %>%
+  rename_with(
+    ~ tolower(str_replace_all(.x, " ", "_") %>%
+      str_remove_all("[()]"))
+    )
+
+```
+
+:::
+
+::: {.card title="2- Join complaint & ownership data"}
 Our complaints will left join with the ownership data such that, even if there's an issue with the FAA database, we'll still have the complaints - it will just be more difficult (or require a different method) to group observations together by owner.
 
 ```{r Left-join-complaints-with-ownership-data}
 #| context: data
+#| echo: true
+#| output: true
+#| code-fold: show
+#| code-summary: "Code: Join complaints with owners"
 
 # Join these owner data with the aircraft seen.
 airnoiseComplaints <- left_join(
   x = airnoiseComplaints,
   # Prepend 'N' to FAA nNumber as these are all US registrations
   y = mutate(.data = getOwners(), nNumber = paste0("N", nNumber)),
-  by = join_by(registration == nNumber)
+  by = join_by(registration == nNumber), 
 )
 
 ```
 
-Let's take a look at some of the operators we found in our complaints, summarized by number of complaints:
+:::
+
+### Tab-Rvw-Operators {title="III. Review operators"}
+
+#### Row
+
+::: {.card title="1- Preliminary cleaning of complaints"}
+Reviewing the list of operators reveals several insights:
+
+- Some operators are listed as "unknown".
+
+- Some operators, like Solberg Aviation, have spelled their name multiple ways.
+
+- One owner has two spellings of its name: SVETFUL / SVETFUR should be SvetFur Aviation LLC <https://opencorporates.com/companies/us_sc/889878> - apparently their agent is Anne Conder who is also listed as Mustang Sally's agent. This suggests that they're a leasing company, not the actual operator, which comes into play later.
+
+- "George Walker Field" is the old name of Somerset Airport. Judging by the address and their website, the listings for "George Walker Field" and "Somerset Air Service" are the same flight school.
+
+- Other names, like the flight school "AMERIFLYERS(...)" can be shortened to a common name like "American Flyers".
+:::
 
 ```{r Review-operator-names}
+#| echo: true
+#| output: true
+#| code-fold: show
+#| code-summary: "Code: Count of complaints per operator"
 
 airnoiseComplaints %>%
   count(operator, sort = TRUE)
 
 ```
 
-# Review and clean aircraft operators for schools, clubs, etc.
+### Tab-Clean-Operators {title="IV. Clean operators"}
 
--   Some operators are listed as "unknown".
+#### Tabset {.tabset}
 
--   Some operators have spelled their name multiple ways, like Solberg Aviation
+##### Tab-Unk-Operator {title="Unknown Operator"}
 
--   One owner has two spellings of its name: SVETFUL / SVETFUR should be SvetFur Aviation LLC <https://opencorporates.com/companies/us_sc/889878> - apparently their agent is Anne Conder who is also listed as Mustang Sally's agent. This suggests that they're a leasing company, not the actual operator, which comes into play later.
-
--   "George Walker Field" is the old name of Somerset Airport. Judging by the address and their website, the listings for "George Walker Field" and "Somerset Air Service" are the same flight school.
-
--   Other names, like the flights school "AMERIFLYERS(...)" can be shortened to a common name like "American Flyers".
-
-```{r Inspect-specific-operator-names}
+```{r Inspect-owner-where-operator-unknown}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Inspect owner names where operator is unknown"
 
 airnoiseComplaints %>%
   filter(operator == "unknown") %>%
   count(operator, owner, state, city)
+
+```
+
+##### Tab-Other-Operators {title="Other Operators"}
+
+###### Column
+
+####### Row
+
+```{r Rvw-Solberg}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Review assorted Solberg spellings"
 
 airnoiseComplaints %>%
   filter(
@@ -238,6 +352,14 @@ airnoiseComplaints %>%
   ) %>%
   count(operator, state, city)
 
+```
+
+```{r Rvw-Svetfur}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Review SVETFUL-SVETFUR operator"
+
 airnoiseComplaints %>%
   filter(
     str_detect(
@@ -245,6 +367,14 @@ airnoiseComplaints %>%
       regex("SVETFU[LR].*", ignore_case=TRUE) )
   ) %>%
   count(operator, state, city)
+
+```
+
+```{r Rvw-Somerset}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Review George Walker/Somerset operators"
 
 airnoiseComplaints %>%
   filter(
@@ -254,6 +384,16 @@ airnoiseComplaints %>%
   ) %>%
   count(operator, state, city)
 
+```
+
+####### Row
+
+```{r Rvw-Flying-Zebra}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Review Flying Zebra spellings"
+
 airnoiseComplaints %>%
   filter(
     str_detect(
@@ -261,6 +401,14 @@ airnoiseComplaints %>%
       regex("^FLYING ZEBRA.*", ignore_case=TRUE) )
   ) %>%
   count(operator, state, city)
+
+```
+
+```{r Rvw-American-Flyers}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: AMERIFLYERS dba American Flyers"
 
 airnoiseComplaints %>%
   filter(
@@ -272,11 +420,32 @@ airnoiseComplaints %>%
   
 ```
 
-Some data suggests that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to suspect they're all being operated as training flights by Infinity Flight group for our analysis.
+### Tab-Infinity {title="V. Special case for one school"}
 
-```{r Clean-operator-names}
+#### Row
+
+::: {.card .flow title="Special Case"}
+Some sources suggest that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to assume they're all being operated as training flights by Infinity Flight group for our analysis.
+:::
+
+#### Row
+
+```{r Count-operator-names}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Count complaints by operator"
 
 airnoiseComplaints %>% count(operator, sort = TRUE)
+
+```
+
+```{r Clean-operator-names}
+#| context: data
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Clean operator names"
 
 airnoiseComplaints <- airnoiseComplaints %>%
   mutate(
@@ -337,6 +506,11 @@ airnoiseComplaints %>% count(operator, sort = TRUE)
 ```
 
 ```{r Add-base-airport-column}
+#| context: data
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Add column for base airport"
 
 # Some aircraft or operators have a known base of operations. We create a new column for that.
 
@@ -378,6 +552,11 @@ airnoiseComplaints %>% count(airport_base, sort = TRUE)
 ```
 
 ```{r Add-using-airport-column}
+#| context: data
+#| echo: true
+#| output: true
+#| code-fold: true
+#| code-summary: "Code: Add column for to/from airport"
 
 # We can figure out where planes are heading to or from if they filed a flight plan.
 
@@ -392,10 +571,24 @@ airnoiseComplaints <- airnoiseComplaints %>%
     )
   )
 
+# Get the total number of observations
+totalComplaints <- nrow(airnoiseComplaints)
+
 airnoiseComplaints %>% count(airport_of_interest, sort = TRUE)
 ```
 
+### Tab-Datatypes {title="VI. Specify Datatypes"}
+
+#### Row
+
+To assist with analysis, we can transform the datatypes of several colum,ns to match information we understand about the data. For example, the `event_date` is a datetime taken from the Eastern time zone.
+
 ```{r Specify-data-types}
+#| context: data
+#| echo: true
+#| output: true
+#| code-fold: show
+#| code-summary: "Code: Specify data types"
 
 airnoiseComplaints <-
   mutate(
@@ -404,48 +597,59 @@ airnoiseComplaints <-
     "complaint_type"  = as_factor(complaint_type),
     "operation_type"  = as_factor(operation_type),
     "altitude_ft_msl" = as.integer(altitude_ft_msl),
-    # "operator"      = as_factor(operator),
     "aircraft_type"   = as_factor(aircraft_type),
     "aircraft_model"  = as_factor(aircraft_model),
-    # "callsign"      = as_factor(callsign),
-    # "registration"  = as_factor(registration),
     "origin"          = as_factor(origin),
     "destination"     = as_factor(destination),
     "airport_base"    = as_factor(airport_base)
   )
-```
 
-```{r}
-
-  
-  
-filterPlaneDetections <- reactive({
-  planeDetections %>%
-    filter(between(startDateTime,
-                    left=ymd(input$dates[1]),
-                    right=ymd(input$dates[2])
-                    )
-            )
-  })
-
-  
 ```
 
 # Visualize traffic by number of observations
 
+```{r}
+
+plotOutput("pltTrafficByNumberOfObservations")
+
+plotOutput("pltTrafficByBaseAirport")
+
+plotOutput("pltComplaintsByAirportOfInterest")
+
+```
+
+```{r Shiny-Server}
+#| context: server
+
+filterAirnoiseComplaints <- reactive({
+  airnoiseComplaints %>%
+    filter(between(event_date,
+                  left=ymd(input$dates[1]),
+                  right=ymd(input$dates[2])
+                  )
+            )
+  })
+
+output$datesAsText <- renderText({
+  paste("you have selected", input$dates)
+  })
+
+```
+
 ```{r Visualize-traffic-by-number-of-observations}
+#| context: server
 
-# Get the total number of observations
-totalComplaints <- nrow(airnoiseComplaints)
-
-complaintsByOperator <- airnoiseComplaints %>%
+complaintsByOperator <- reactive({
+  filterAirnoiseComplaints() %>%
   group_by(operator) %>%
   count(name = "nSightings") %>%
   mutate(percentage = nSightings / totalComplaints * 100) %>%
   # Exclude null/NA names and anything accounting for under .7%
   filter(percentage > .7 && !is.na(operator))
+})
 
-pltTrafficByNumberOfObservations <- complaintsByOperator %>%
+output$pltTrafficByNumberOfObservations <- renderPlot({
+  p <- complaintsByOperator() %>%
   ggplot(aes(x=reorder(operator, nSightings), y=nSightings) ) +
   geom_segment(
     aes(
@@ -479,10 +683,12 @@ pltTrafficByNumberOfObservations <- complaintsByOperator %>%
   labs(
     title = "Number of Sightings by Operator",
     subtitle = str_glue_data(
-      .x = airnoiseComplaints,
+      .x = filterAirnoiseComplaints(),
       "Top Operators {min(event_date)} - {max(event_date)}"
     )
   )
+  p
+})
 
 ```
 
@@ -491,16 +697,17 @@ This is a total of 1603 observations, during 41 days during which observations w
 # Visualize traffic by base airport
 
 ```{r Visualize-traffic-by-base-airport}
+#| context: server
 
-# Get the total number of observations
-totalComplaints <- nrow(airnoiseComplaints)
-
-complaintsByBaseAirport <- airnoiseComplaints %>%
+complaintsByBaseAirport <- reactive({
+  filterAirnoiseComplaints() %>%
   group_by(airport_base) %>%
   count(name = "nSightings") %>%
   mutate(percentage = nSightings / totalComplaints * 100)
+})
 
-pltTrafficByBaseAirport <- complaintsByBaseAirport %>%
+output$pltTrafficByBaseAirport <- renderPlot({
+  p <- complaintsByBaseAirport() %>%
   filter(!is.na(airport_base)) %>% # Exclude null/NA airports
   ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
     geom_segment(
@@ -530,7 +737,7 @@ pltTrafficByBaseAirport <- complaintsByBaseAirport %>%
     labs(
       title = "Number of Complaints by Base Airport",
       subtitle = str_glue_data(
-        .x = airnoiseComplaints,
+        .x = filterAirnoiseComplaints(),
         "Top Airports {min(event_date)} - {max(event_date)}"
       )
     ) +
@@ -547,6 +754,8 @@ pltTrafficByBaseAirport <- complaintsByBaseAirport %>%
         ),
       hjust = "right"
     )
+  p
+})
 
 ```
 
@@ -557,11 +766,10 @@ On 6/24/2024, Teterboro's (KTEB) noise office reached out to report that our rep
 Additional context may strengthen the value of this conclusion even further: if I understand correctly, complaints for KTEB are submitted through a PlaneNoise "webtrak" system, and these complaints are routed to the Port Authority. Other Port Authority airports include KEWR, KLGA, and KJFK, so after summing these complaints, the Port Authority is responsible for double the report volume of KMMU.
 
 ```{r Visualize-traffic-by-airport-of-interest}
+#| context: server
 
-# Get the total number of observations
-totalComplaints <- nrow(airnoiseComplaints)
-
-complaintsByOriginOrDest <- airnoiseComplaints %>%
+complaintsByOriginOrDest <- reactive({
+  filterAirnoiseComplaints() %>%
   group_by(airport_of_interest) %>%
   # add a count of sightings per airport
   count(name = "nSightings", sort = TRUE) %>%
@@ -576,10 +784,11 @@ complaintsByOriginOrDest <- airnoiseComplaints %>%
          ) %>%
   # remove rows where we don't know about the airport
   filter(!is.na(airport_of_interest))
+})
 
-pltComplaintsByAirportOfInterest <- ggplot(
-  data = complaintsByOriginOrDest,
-  aes(x=reorder(airport_of_interest, nSightings),
+output$pltComplaintsByAirportOfInterest <- renderPlot({
+  p <- complaintsByOriginOrDest() %>%
+  ggplot(aes(x=reorder(airport_of_interest, nSightings),
       y=nSightings,
       color=!port_authority_affiliate
       )
@@ -616,14 +825,14 @@ pltComplaintsByAirportOfInterest <- ggplot(
   labs(
     title = "Number of Sightings by Origin or Destination Airport",
     subtitle = str_glue_data(
-      .x = airnoiseComplaints,
+      .x = filterAirnoiseComplaints(),
       "Top Airports {min(event_date)} - {max(event_date)}")
     ) +
   annotate(
     geom = "label",
     x = 2,
     y = max(complaintsByOriginOrDest$nSightings),
-    label = str_glue_data(.x = airnoiseComplaints,
+    label = str_glue_data(.x = filterAirnoiseComplaints(),
       "We were unable to determine the\n",
       "origin or destination of the aircraft\n",
       "involved in {sum(is.na(airport_of_interest))}",
@@ -631,106 +840,7 @@ pltComplaintsByAirportOfInterest <- ggplot(
       "{round(sum(is.na(airport_of_interest)) / totalComplaints * 100)}%)"
       ),
     hjust = "right")
+    p
+})
 
 ```
-
-# Construct a dashboard
-
-# {.sidebar}
-```{r Shiny-UI}
-
-# ui <- shinyUI(bootstrapPage(
-#   svgPanZoomOutput(outputId = "main_plot")
-# ))
-
-# ui <- page_sidebar( # Shiny, not Quarto
-
-# title = "Analysis of AirNoise.io Noise Complaints East of Solberg Airport (N51) in NJ",
-# sidebar = sidebar(
-#   "Sidebar Text for your Sidebar"),
-navset_underline(
-  nav_panel("Number of Sightings by Operator Navpanel",
-            plotOutput("pltTrafficByNumberOfObservations")
-            ),
-  nav_panel("# Complaints by Base Airport",
-            plotOutput("pltTrafficByBaseAirport")
-            ),
-  nav_panel("# Sightings by Origin or Destination Airport",
-            plotOutput("pltComplaintsByAirportOfInterest")
-            ))
-dateRangeInput("dates",
-                "Filter observations/complaints by date:",
-                min = min(airnoiseComplaints$event_date),
-                max = max(airnoiseComplaints$event_date),
-                start = min(airnoiseComplaints$event_date),
-                end = max(airnoiseComplaints$event_date)
-                )
-textOutput("datesAsText")
-
-```
-
-# Define and run the Shiny Server
-
-```{r Shiny-Server}
-#| context: server
-
-# server <- function(input, output) { # Shiny, not Quarto
-
-  
-  #TODO: probably need to move our plotting functionality down into the Server section now?
-  
-output$pltTrafficByNumberOfObservations <- renderPlot({
-  pltTrafficByNumberOfObservations
-  })
-
-output$pltTrafficByBaseAirport <- renderPlot({
-  pltTrafficByBaseAirport
-  })
-
-output$pltComplaintsByAirportOfInterest <- renderPlot({
-  pltComplaintsByAirportOfInterest
-  })
-
-output$datesAsText <- renderText({
-  paste("you have selected", input$dates)
-  })
-
-# } # Shiny, not Quarto
-  
-  
-# runApp(list(ui=ui,server=server))
-
-```
-
-# Plots
-<!-- 
-## Traffic by # of Observations
-
-```{r Plot-Traffic-By-Number-of-Observations}
-renderPlot({
-  pltTrafficByNumberOfObservations
-  })
-```
-
-## Traffic by Base Airport
-
-```{r Plot-Traffic-By-Base-Airport}
-renderPlot({
-  pltTrafficByBaseAirport
-  })
-```
-
-## Complaints by Airport of Interest
-```{r Plot-Complaints-By-Airport-of-Interest}
-renderPlot({
-  pltComplaintsByAirportOfInterest
-  })
-```
-
-## Dates Input Element
-```{r Input-dates}
-renderText({
-  paste("you have selected", input$dates)
-  })
-```
- -->
