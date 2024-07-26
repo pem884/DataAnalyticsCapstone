@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,127 +64,322 @@ ul.task-list li input[type="checkbox"] {
 <script src="AircraftActivity_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="AircraftActivity_files/libs/quarto-html/anchor.min.js"></script>
 <link href="AircraftActivity_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="AircraftActivity_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="AircraftActivity_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="AircraftActivity_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="AircraftActivity_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="AircraftActivity_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="AircraftActivity_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="AircraftActivity_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="AircraftActivity_files/libs/quarto-dashboard/stickythead.js"></script>
+<script src="AircraftActivity_files/libs/quarto-dashboard/datatables.min.js" kdttablesentinel="true"></script>
+<script src="AircraftActivity_files/libs/quarto-dashboard/pdfmake.min.js" kdttablesentinel="true"></script>
+<script src="AircraftActivity_files/libs/quarto-dashboard/vfs_fonts.js" kdttablesentinel="true"></script>
+<script src="AircraftActivity_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="AircraftActivity_files/libs/quarto-dashboard/components.js"></script>
+<link href="AircraftActivity_files/libs/quarto-dashboard/datatables.min.css" rel="stylesheet" kdttablesentinel="true">
 
 
 </head>
 
-<body class="fullcontent">
+<body class="quarto-dashboard dashboard-fill dashboard-sidebar fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Aircraft Activity</h1>
-</div>
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
 
 
+    <div class="navbar-brand-container">       
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Patrick Moore </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Aircraft Activity</a></div>
+        
+        <div class="navbar-author">Patrick Moore</div>
+      </div>
+    </div>
+<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-set-up-environment" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#set-up-environment" data-scrolling="true" href="#set-up-environment" aria-controls="set-up-environment" aria-selected="true"><span class="nav-link-text">Set up environment</span></a></li><li class="nav-item" role="presentation"><a id="tab-visualize-traffic-by-number-of-observations" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#visualize-traffic-by-number-of-observations" data-scrolling="false" href="#visualize-traffic-by-number-of-observations" aria-controls="visualize-traffic-by-number-of-observations" aria-selected="false"><span class="nav-link-text">Visualize traffic by number of observations</span></a></li><li class="nav-item" role="presentation"><a id="tab-visualize-traffic-by-base-airport" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#visualize-traffic-by-base-airport" data-scrolling="false" href="#visualize-traffic-by-base-airport" aria-controls="visualize-traffic-by-base-airport" aria-selected="false"><span class="nav-link-text">Visualize traffic by base airport</span></a></li><li class="nav-item" role="presentation"><a id="tab-are-we-sending-complaints-to-the-right-airport" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#are-we-sending-complaints-to-the-right-airport" data-scrolling="false" href="#are-we-sending-complaints-to-the-right-airport" aria-controls="are-we-sending-complaints-to-the-right-airport" aria-selected="false"><span class="nav-link-text">Are we sending complaints to the right airport?</span></a></li></ul><div class="quarto-dashboard-links"><a class="quarto-dashboard-link" href="https://github.com/pem884/DataAnalyticsCapstone"><i class="bi bi-github"></i></a></div></div></div>
+</nav>
 </header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages dashboard-sidebar-container">  
+
+<div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
+<div class="tab-content bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="columns" data-scrolling="true" aria-labelledby="tab-set-up-environment">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header dashboard-card-no-title bslib-navs-card-title">
+
+<ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-1"><li class="nav-item" role="presentation"><a href="#card-tabset-1-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="I. Libraries" aria-selected="true" class="nav-link active">I. Libraries</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="II. Cleaning &amp; joining" aria-selected="false" class="nav-link">II. Cleaning &amp; joining</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="III. Review operators" aria-selected="false" class="nav-link">III. Review operators</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="IV. Clean operators" aria-selected="false" class="nav-link">IV. Clean operators</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="V. Special case for one school" aria-selected="false" class="nav-link">V. Special case for one school</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="VI. Specify Datatypes" aria-selected="false" class="nav-link">VI. Specify Datatypes</a></li></ul></div>
 
 
-<section id="shiny-documents" class="level2">
-<h2 class="anchored" data-anchor-id="shiny-documents">Shiny Documents</h2>
-<p>This Quarto document is made interactive using Shiny. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about Shiny interactive documents at <a href="https://quarto.org/docs/interactive/shiny/" class="uri">https://quarto.org/docs/interactive/shiny/</a>.</p>
-</section>
-<section id="inputs-and-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="inputs-and-outputs">Inputs and Outputs</h2>
-<p>You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change. This demonstrates how a standard R plot can be made interactive:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="form-group shiny-input-container">
-<label class="control-label" id="bins-label" for="bins">Number of bins:</label>
-<input class="js-range-slider" id="bins" data-skin="shiny" data-min="1" data-max="50" data-from="30" data-step="1" data-grid="true" data-grid-num="9.8" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number">
-</div>
-</div>
-<div class="cell-output-display">
-<div class="shiny-plot-output html-fill-item" id="distPlot" style="width:100%;height:400px;"></div>
-</div>
-</div>
-</section>
-<section id="set-up-environment" class="level1">
-<h1>Set up environment</h1>
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-1"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-1"><div class="card-body html-fill-item html-fill-container" data-title="I. Libraries">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-title="1- Libraries used" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">1- Libraries used</div></div>
+<div class="card-body html-fill-item html-fill-container">
 <p>We rely on the tidyverse to work with our data and <code>RCurl</code> to get a current version of the FAA ownership database.</p>
-<div class="cell" data-context="setup">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
-
-Attaching package: 'RCurl'
-
-
-The following object is masked from 'package:tidyr':
-
-    complete</code></pre>
 </div>
+<div class="cell card-body html-fill-item html-fill-container" data-context="setup">
+<details class="code-fold">
+<summary>Code: environment setup</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bslib)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(directlabels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RCurl)      <span class="co"># For downloading the FAA database</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)      <span class="co"># For interactive plots</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(svglite)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(svgPanZoom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</section>
-<section id="import-complaints-from-airnoise.io" class="level1">
-<h1>Import complaints from Airnoise.io</h1>
-<p>Export the complaint database from airnoise.io in CSV format. If it is zipped, it can remain so because <code>readr::read_csv()</code> handles that for us.</p>
-<p><code>anCsvFilesPath</code> must indicate the path at which the exported database has been saved (the example path is listed in a Windows-friendly format).</p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1769 Columns: 17
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (12): event_date, complaint_type, operation_type, operator, aircraft_ty...
-dbl   (4): distance (mi), altitude (ft MSL), aircraft_latitude, aircraft_lon...
-time  (1): event_time
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card html-fill-item html-fill-container bslib-card" data-title="2- Import complaints from Airnoise.io" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">2- Import complaints from Airnoise.io</div></div>
+<div class="card-body html-fill-item html-fill-container">
+<p>Export the complaint database from airnoise.io in CSV format. If it is zipped, it can remain so because <code>readr::read_csv()</code> handles that for us. <code>anCsvFilesPath</code> must indicate the path at which the exported database has been saved (the example path is listed in a Windows-friendly format).</p>
 </div>
+<div class="cell card-body html-fill-item html-fill-container" data-context="data">
+<details class="code-fold">
+<summary>Code: Import CSV with complaint data</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>anCsvFilesPath <span class="ot">&lt;-</span> <span class="st">'E:</span><span class="sc">\\</span><span class="st">Database</span><span class="sc">\\</span><span class="st">airnoise_complaints_2024-06-24.zip'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(anCsvFilesPath)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</section>
-<section id="preliminary-cleaning-of-complaints" class="level1">
-<h1>Preliminary cleaning of complaints</h1>
-<p>The minimum data necessary to gain insights about a given complaint will include the registration field, so we drop any row without it.</p>
-<p>Some columns include spaces and special characters, so we also clean them by replacing spaces with underscores and removing parentheses.</p>
-</section>
-<section id="download-and-import-faa-ownership-data" class="level1">
-<h1>Download and import FAA ownership data</h1>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card html-fill-item html-fill-container bslib-card" data-title="3- Download &amp; import FAA registration data" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">3- Download &amp; import FAA registration data</div></div>
+<div class="card-body html-fill-item html-fill-container">
 <p>Download the FAA registration database if it doesn’t exist or is too old. This is helpful to ensure that owners named similarly are indeed the same as one another (to clean misspellings, etc.). The variable <code>maxAgeDays</code> is set at 14 initially; this is an arbitrary value. We change the <code>name</code> field as it’s the name of the principal owner, so <code>owner</code> is more specific and will help distinguish from the <code>operator</code> name which we’ll use in a different way (to show who is believed or likely to be using the aircraft).</p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in unzip(archivePath, files = "MASTER.txt", exdir = extractPath, :
-requested file not found in the zip file</code></pre>
 </div>
+<div class="cell card-body html-fill-item html-fill-container" data-context="data">
+<details class="code-fold">
+<summary>Code: Import FAA registration data</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How old can the file be before it needs to be re-downloaded?</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>maxAgeDays <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the URL of the file you want to download</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>faaUrl <span class="ot">&lt;-</span> <span class="st">"https://registry.faa.gov/database/ReleasableAircraft.zip"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the file name and location to save the file on your computer</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>projectPath <span class="ot">&lt;-</span> <span class="st">"E:</span><span class="sc">\\</span><span class="st">Database</span><span class="sc">\\</span><span class="st">Public Datasets</span><span class="sc">\\</span><span class="st">FAA Aircraft List</span><span class="sc">\\</span><span class="st">"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>archiveName <span class="ot">&lt;-</span> <span class="st">"ReleasableAircraft.zip"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>extractPath <span class="ot">&lt;-</span> <span class="fu">paste0</span>(projectPath,<span class="st">"</span><span class="sc">\\</span><span class="st">ReleasableAircraft"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>archivePath <span class="ot">&lt;-</span> <span class="fu">paste0</span>(projectPath, archiveName)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ownershipCsvPath <span class="ot">&lt;-</span> <span class="fu">paste0</span>(extractPath,<span class="st">"</span><span class="sc">\\</span><span class="st">MASTER.txt"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ownershipCsvNotExists <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">file.exists</span>(ownershipCsvPath)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to assess how old file can be</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>fileTooOld<span class="ot">=</span><span class="cf">function</span>(maxAgeDays, path){</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  isTooOld <span class="ot">&lt;-</span> <span class="fu">file.mtime</span>(path) <span class="sc">&lt;=</span> <span class="fu">now</span>() <span class="sc">-</span> <span class="fu">days</span>(maxAgeDays)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(isTooOld)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to streamline download</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>registryDownload<span class="ot">=</span><span class="cf">function</span>(srcUrl, destPath){</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Download the FAA database</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  f <span class="ot">=</span> <span class="fu">CFILE</span>(destPath, <span class="at">mode=</span><span class="st">"wb"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curlPerform</span>(<span class="at">url =</span> srcUrl, <span class="at">writedata =</span> f<span class="sc">@</span>ref, <span class="at">noprogress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">close</span>(f)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ( ownershipCsvNotExists <span class="sc">||</span> <span class="fu">fileTooOld</span>(maxAgeDays, ownershipCsvPath) ) {</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">registryDownload</span>(faaUrl,archivePath)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unzip</span>(archivePath,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">files =</span> <span class="st">"MASTER.txt"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">exdir =</span> extractPath,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>getOwners <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  owners <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    ownershipCsvPath,</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>,</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_col_types =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># leave nothing to chance</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_select =</span> <span class="fu">c</span>(</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"hexId"</span>          <span class="ot">=</span> <span class="st">"MODE S CODE HEX"</span>,</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>      <span class="st">"nNumber"</span>        <span class="ot">=</span> <span class="st">"N-NUMBER"</span>,</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>      <span class="st">"serialNumber"</span>   <span class="ot">=</span> <span class="st">"SERIAL NUMBER"</span>,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>      <span class="st">"mfrMdlCode"</span>     <span class="ot">=</span> <span class="st">"MFR MDL CODE"</span>,</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>      <span class="st">"engMfrMdl"</span>      <span class="ot">=</span> <span class="st">"ENG MFR MDL"</span>,</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>      <span class="st">"yearMfr"</span>        <span class="ot">=</span> <span class="st">"YEAR MFR"</span>,</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>      <span class="st">"typeRegistrant"</span> <span class="ot">=</span> <span class="st">"TYPE REGISTRANT"</span>,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>      <span class="st">"owner"</span>          <span class="ot">=</span> <span class="st">"NAME"</span>,</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>      <span class="st">"street"</span>         <span class="ot">=</span> <span class="st">"STREET"</span>,</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>      <span class="st">"street2"</span>        <span class="ot">=</span> <span class="st">"STREET2"</span>,</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>      <span class="st">"city"</span>           <span class="ot">=</span> <span class="st">"CITY"</span>,</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>      <span class="st">"state"</span>          <span class="ot">=</span> <span class="st">"STATE"</span>,</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>      <span class="st">"zipCode"</span>        <span class="ot">=</span> <span class="st">"ZIP CODE"</span>,</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>      <span class="st">"region"</span>         <span class="ot">=</span> <span class="st">"REGION"</span>,</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>      <span class="st">"county"</span>         <span class="ot">=</span> <span class="st">"COUNTY"</span>,</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>      <span class="st">"country"</span>        <span class="ot">=</span> <span class="st">"COUNTRY"</span>,</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>      <span class="st">"lastActionDate"</span> <span class="ot">=</span> <span class="st">"LAST ACTION DATE"</span>,</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>      <span class="st">"certIssueDate"</span>  <span class="ot">=</span> <span class="st">"CERT ISSUE DATE"</span>,</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>      <span class="st">"certification"</span>  <span class="ot">=</span> <span class="st">"CERTIFICATION"</span>,</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>      <span class="st">"typeAircraft"</span>   <span class="ot">=</span> <span class="st">"TYPE AIRCRAFT"</span>,</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>      <span class="st">"typeEngine"</span>     <span class="ot">=</span> <span class="st">"TYPE ENGINE"</span>,</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>      <span class="st">"statusCode"</span>     <span class="ot">=</span> <span class="st">"STATUS CODE"</span>,</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>      <span class="st">"modeSCode"</span>      <span class="ot">=</span> <span class="st">"MODE S CODE"</span>,</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>      <span class="st">"fractOwner"</span>     <span class="ot">=</span> <span class="st">"FRACT OWNER"</span>,</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>      <span class="st">"airWorthDate"</span>   <span class="ot">=</span> <span class="st">"AIR WORTH DATE"</span>,</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>      <span class="st">"otherNames1"</span>    <span class="ot">=</span> <span class="st">"OTHER NAMES(1)"</span>,</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>      <span class="st">"otherNames2"</span>    <span class="ot">=</span> <span class="st">"OTHER NAMES(2)"</span>,</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>      <span class="st">"otherNames3"</span>    <span class="ot">=</span> <span class="st">"OTHER NAMES(3)"</span>,</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>      <span class="st">"otherNames4"</span>    <span class="ot">=</span> <span class="st">"OTHER NAMES(4)"</span>,</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>      <span class="st">"otherNames5"</span>    <span class="ot">=</span> <span class="st">"OTHER NAMES(5)"</span>,</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>      <span class="st">"expirationDate"</span> <span class="ot">=</span> <span class="st">"EXPIRATION DATE"</span>,</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      <span class="st">"uniqueId"</span>       <span class="ot">=</span> <span class="st">"UNIQUE ID"</span>,</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      <span class="st">"kitMfr"</span>         <span class="ot">=</span> <span class="st">"KIT MFR"</span>,</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>      <span class="st">"kitMdl"</span>         <span class="ot">=</span> <span class="st">"KIT MODEL"</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_types =</span> <span class="fu">list</span>(</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>      <span class="st">"N-NUMBER"</span>         <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>      <span class="st">"SERIAL NUMBER"</span>    <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>      <span class="st">"MFR MDL CODE"</span>     <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ENG MFR MDL"</span>      <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>      <span class="st">"YEAR MFR"</span>         <span class="ot">=</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>      <span class="st">"TYPE REGISTRANT"</span>  <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>      <span class="st">"NAME"</span>             <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>      <span class="st">"STREET"</span>           <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>      <span class="st">"STREET2"</span>          <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>      <span class="st">"CITY"</span>             <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>      <span class="st">"STATE"</span>            <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ZIP CODE"</span>         <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>      <span class="st">"REGION"</span>           <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>      <span class="st">"COUNTY"</span>           <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>      <span class="st">"COUNTRY"</span>          <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>      <span class="st">"LAST ACTION DATE"</span> <span class="ot">=</span> <span class="fu">col_date</span>(<span class="at">format =</span> <span class="st">"%Y%m%d"</span>),</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>      <span class="st">"CERT ISSUE DATE"</span>  <span class="ot">=</span> <span class="fu">col_date</span>(<span class="at">format =</span> <span class="st">"%Y%m%d"</span>),</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>      <span class="st">"CERTIFICATION"</span>    <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>      <span class="st">"TYPE AIRCRAFT"</span>    <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>      <span class="st">"TYPE ENGINE"</span>      <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>      <span class="st">"STATUS CODE"</span>      <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>      <span class="st">"MODE S CODE"</span>      <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>      <span class="st">"FRACT OWNER"</span>      <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>      <span class="st">"AIR WORTH DATE"</span>   <span class="ot">=</span> <span class="fu">col_date</span>(<span class="at">format =</span> <span class="st">"%Y%m%d"</span>),</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OTHER NAMES(1)"</span>   <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OTHER NAMES(2)"</span>   <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OTHER NAMES(3)"</span>   <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OTHER NAMES(4)"</span>   <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>      <span class="st">"OTHER NAMES(5)"</span>   <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>      <span class="st">"EXPIRATION DATE"</span>  <span class="ot">=</span> <span class="fu">col_date</span>(<span class="at">format =</span> <span class="st">"%Y%m%d"</span>),</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>      <span class="st">"UNIQUE ID"</span>        <span class="ot">=</span> <span class="fu">col_character</span>(),</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>      <span class="st">"KIT MFR"</span>          <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>      <span class="st">"KIT MODEL"</span>        <span class="ot">=</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>      <span class="st">"MODE S CODE HEX"</span>  <span class="ot">=</span> <span class="fu">col_character</span>()</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(owners)</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<section id="join-complaint-and-ownership-data" class="level2">
-<h2 class="anchored" data-anchor-id="join-complaint-and-ownership-data">Join complaint and ownership data</h2>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-2"><div class="card-body html-fill-item html-fill-container" data-title="II. Cleaning &amp; joining">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-title="1- Preliminary cleaning of complaints" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">1- Preliminary cleaning of complaints</div></div>
+<div class="card-body html-fill-item html-fill-container">
+<p>The minimum data necessary to gain insights about a given complaint will include the registration field, so we drop any row without it. Some columns include spaces and special characters, so we also clean them by replacing spaces with underscores and removing parentheses.</p>
+</div>
+<div class="cell card-body html-fill-item html-fill-container" data-context="data">
+<details open="" class="code-fold">
+<summary>Code: Cleaning complaint data</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(airnoiseComplaints, registration)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Repair some badly-named columns</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">tolower</span>(<span class="fu">str_replace_all</span>(.x, <span class="st">" "</span>, <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_remove_all</span>(<span class="st">"[()]"</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card html-fill-item html-fill-container bslib-card" data-title="2- Join complaint &amp; ownership data" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">2- Join complaint &amp; ownership data</div></div>
+<div class="card-body html-fill-item html-fill-container">
 <p>Our complaints will left join with the ownership data such that, even if there’s an issue with the FAA database, we’ll still have the complaints - it will just be more difficult (or require a different method) to group observations together by owner.</p>
-<p>Let’s take a look at some of the operators we found in our complaints, summarized by number of complaints:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+</div>
+<div class="cell card-body html-fill-item html-fill-container" data-context="data">
+<details open="" class="code-fold">
+<summary>Code: Join complaints with owners</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join these owner data with the aircraft seen.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> airnoiseComplaints,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Prepend 'N' to FAA nNumber as these are all US registrations</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">mutate</span>(<span class="at">.data =</span> <span class="fu">getOwners</span>(), <span class="at">nNumber =</span> <span class="fu">paste0</span>(<span class="st">"N"</span>, nNumber)),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(registration <span class="sc">==</span> nNumber), </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-3"><div class="card-body html-fill-item html-fill-container" data-title="III. Review operators">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-title="1- Preliminary cleaning of complaints" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">1- Preliminary cleaning of complaints</div></div>
+<div class="card-body html-fill-item html-fill-container">
+<p>Reviewing the list of operators reveals several insights:</p>
+<ul>
+<li><p>Some operators are listed as “unknown”.</p></li>
+<li><p>Some operators, like Solberg Aviation, have spelled their name multiple ways.</p></li>
+<li><p>One owner has two spellings of its name: SVETFUL / SVETFUR should be SvetFur Aviation LLC <a href="https://opencorporates.com/companies/us_sc/889878" class="uri">https://opencorporates.com/companies/us_sc/889878</a> - apparently their agent is Anne Conder who is also listed as Mustang Sally’s agent. This suggests that they’re a leasing company, not the actual operator, which comes into play later.</p></li>
+<li><p>“George Walker Field” is the old name of Somerset Airport. Judging by the address and their website, the listings for “George Walker Field” and “Somerset Air Service” are the same flight school.</p></li>
+<li><p>Other names, like the flight school “AMERIFLYERS(…)” can be shortened to a common name like “American Flyers”.</p></li>
+</ul>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details open="" class="code-fold">
+<summary>Code: Count of complaints per operator</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 492 × 2
    operator                              n
    &lt;chr&gt;                             &lt;int&gt;
@@ -167,19 +396,34 @@ requested file not found in the zip file</code></pre>
 # ℹ 482 more rows</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="review-and-clean-aircraft-operators-for-schools-clubs-etc." class="level1">
-<h1>Review and clean aircraft operators for schools, clubs, etc.</h1>
-<ul>
-<li><p>Some operators are listed as “unknown”.</p></li>
-<li><p>Some operators have spelled their name multiple ways, like Solberg Aviation</p></li>
-<li><p>One owner has two spellings of its name: SVETFUL / SVETFUR should be SvetFur Aviation LLC <a href="https://opencorporates.com/companies/us_sc/889878" class="uri">https://opencorporates.com/companies/us_sc/889878</a> - apparently their agent is Anne Conder who is also listed as Mustang Sally’s agent. This suggests that they’re a leasing company, not the actual operator, which comes into play later.</p></li>
-<li><p>“George Walker Field” is the old name of Somerset Airport. Judging by the address and their website, the listings for “George Walker Field” and “Somerset Air Service” are the same flight school.</p></li>
-<li><p>Other names, like the flights school “AMERIFLYERS(…)” can be shortened to a common name like “American Flyers”.</p></li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-4"><div class="card-body html-fill-item html-fill-container" data-title="IV. Clean operators">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header dashboard-card-no-title bslib-navs-card-title">
+
+<ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-9"><li class="nav-item" role="presentation"><a href="#card-tabset-9-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Unknown Operator" aria-selected="true" class="nav-link active">Unknown Operator</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-9-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Other Operators" aria-selected="false" class="nav-link">Other Operators</a></li></ul></div>
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-9"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-9-1"><div class="card-body html-fill-item html-fill-container" data-title="Unknown Operator">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Inspect owner names where operator is unknown</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(operator <span class="sc">==</span> <span class="st">"unknown"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, owner, state, city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 14 × 5
    operator owner                               state city                n
    &lt;chr&gt;    &lt;chr&gt;                               &lt;fct&gt; &lt;fct&gt;           &lt;int&gt;
@@ -198,21 +442,83 @@ requested file not found in the zip file</code></pre>
 13 unknown  WHEELS UP PARTNERS LLC              NY    NEW YORK            1
 14 unknown  &lt;NA&gt;                                &lt;NA&gt;  &lt;NA&gt;                9</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-9-2"><div class="card-body html-fill-item html-fill-container" data-title="Other Operators">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Review assorted Solberg spellings</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      operator,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">regex</span>(<span class="st">"^SOLBERG AV.*"</span>, <span class="at">ignore_case=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, state, city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 2 × 4
   operator                state city                   n
   &lt;chr&gt;                   &lt;fct&gt; &lt;fct&gt;              &lt;int&gt;
 1 SOLBERG AVIATION CO INC NJ    WHITEHOUSE STATION   123
 2 SOLBERG AVN CO INC      NJ    WHITEHOUSE STATION    32</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Review SVETFUL-SVETFUR operator</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      operator,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">regex</span>(<span class="st">"SVETFU[LR].*"</span>, <span class="at">ignore_case=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, state, city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 2 × 4
   operator             state city       n
   &lt;chr&gt;                &lt;fct&gt; &lt;fct&gt;  &lt;int&gt;
 1 SVETFUL AVIATION LLC SC    CAMDEN     5
 2 SVETFUR AVIATION LLC SC    CAMDEN     7</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Review George Walker/Somerset operators</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      operator,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">regex</span>(<span class="st">".*GEORGE WALKER.*|^SOMERSET AIR.*"</span>, <span class="at">ignore_case=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, state, city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 4 × 4
   operator                    state city           n
   &lt;chr&gt;                       &lt;fct&gt; &lt;fct&gt;      &lt;int&gt;
@@ -221,23 +527,101 @@ requested file not found in the zip file</code></pre>
 3 GEORGE WALKER FIELD INC DBA NJ    BEDMINSTER     6
 4 SOMERSET AIR SERVICE INC    NJ    BEDMINSTER    30</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Review Flying Zebra spellings</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      operator,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">regex</span>(<span class="st">"^FLYING ZEBRA.*"</span>, <span class="at">ignore_case=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, state, city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 2 × 4
   operator                           state city              n
   &lt;chr&gt;                              &lt;fct&gt; &lt;fct&gt;         &lt;int&gt;
 1 FLYING ZEBRA AIRCRAFT HOLDINGS LLC NY    WEST HARRISON     1
 2 FLYING ZEBRA PARTNERS LLC          NY    WEST HARRISON     2</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: AMERIFLYERS dba American Flyers</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      operator,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">regex</span>(<span class="st">"^AMERIFLYERS.*"</span>, <span class="at">ignore_case=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, state, city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 1 × 4
   operator                 state city        n
   &lt;chr&gt;                    &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
 1 AMERIFLYERS OF TEXAS INC TX    ADDISON    98</code></pre>
 </div>
 </div>
-<p>Some data suggests that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to suspect they’re all being operated as training flights by Infinity Flight group for our analysis.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+</div></div></div><bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-5"><div class="card-body html-fill-item html-fill-container" data-title="V. Special case for one school">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card flow bslib-card html-fill-container" data-fill="false" data-title="Special Case" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title html-fill-item html-fill-container">Special Case</div></div>
+<div class="card-body html-fill-item html-fill-container">
+<p>Some sources suggest that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to assume they’re all being operated as training flights by Infinity Flight group for our analysis.</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Count complaints by operator</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(operator, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 492 × 2
    operator                              n
    &lt;chr&gt;                             &lt;int&gt;
@@ -253,7 +637,73 @@ requested file not found in the zip file</code></pre>
 10 Atp Flight School                    28
 # ℹ 482 more rows</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Clean operator names</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">operator =</span> <span class="fu">case_when</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Simple transforms</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"unknown"</span> <span class="sc">~</span> owner, <span class="co"># copy the owner field if operator unknown</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"AMERIFLYERS OF TEXAS INC"</span> <span class="sc">~</span> <span class="st">"American Flyers"</span>,             <span class="co"># School</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"BLUE SKY AVIATION ASSOCIATION INC"</span> <span class="sc">~</span> <span class="st">"Blue Sky Avn Assoc"</span>, <span class="co"># Club</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"CERTIFIED AVIATION LLC"</span> <span class="sc">~</span> <span class="st">"Certified Flyers"</span>,              <span class="co"># School</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"LUVSFLYING FLIGHT TRAINING LLC"</span> <span class="sc">~</span> <span class="st">"Luvsflying Flt Trn"</span>,    <span class="co"># School</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"MACH 1 PILOTS ASSOCIATION INC"</span> <span class="sc">~</span> <span class="st">"Mach 1 Pilots Assoc"</span>, <span class="co"># Club</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"RARITAN VALLEY FLYING SCHOOL"</span> <span class="sc">~</span> <span class="st">"Princeton Fl Schl"</span>, <span class="co"># School</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"RICHMOND PILOTS CORP"</span> <span class="sc">~</span> <span class="st">"Richmond Pilots"</span>,        <span class="co"># Club</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"RTD AVIATION LLC"</span> <span class="sc">~</span> <span class="st">"TriState Avn"</span>,          <span class="co"># School</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>      owner <span class="sc">==</span> <span class="st">"SKY AVIATION CORP"</span> <span class="sc">~</span> <span class="st">"Sky Avn"</span>,        <span class="co"># Possibly an individual</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      <span class="co"># More complex cases</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">"^SOLBERG AV.*"</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Solberg Avn"</span>,       <span class="co"># School/rental</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">".*GEORGE WALKER.*|^SOMERSET AIR.*"</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Somerset Air Svc"</span>,  <span class="co"># School/rental</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">"^FLYING ZEBRA.*"</span>,</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Flying Zebra"</span>,      <span class="co"># Charter</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">"^INFINITY FLIGHT G.*|^MUSTANG SALLY.*|^CHRISTIANSEN AV.*|^FOX LEASING.*|SVETFU[LR].*"</span>,</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Infinity Flt Grp"</span>,  <span class="co"># School</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">"^AA[ -]AERO"</span>,</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Air Fleet Trn Sys"</span>, <span class="co"># School, 14 a/c as of 6/25/24</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">"^AIR[- ]?MODS FLIGHT"</span>,</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Air-Mods Flt Acdmy"</span>, <span class="co"># School/rental</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>        operator,</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">regex</span>(<span class="st">"150TH AERO.*"</span>,</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>              <span class="at">ignore_case=</span><span class="cn">TRUE</span>) ) <span class="sc">~</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>        <span class="st">"150th Aero"</span>, <span class="co"># Club</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> operator    <span class="co"># leave it alone if no match found here</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(operator, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 486 × 2
    operator               n
    &lt;chr&gt;              &lt;int&gt;
@@ -270,8 +720,53 @@ requested file not found in the zip file</code></pre>
 # ℹ 476 more rows</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Add column for base airport</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some aircraft or operators have a known base of operations. We create a new column for that.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">airport_base =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Solberg (Readington)</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Solberg Avn"</span>         <span class="sc">~</span> <span class="st">"N51"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Blue Sky Avn Assoc"</span>  <span class="sc">~</span> <span class="st">"N51"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Sky Avn"</span>             <span class="sc">~</span> <span class="st">"N51"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Somerset</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Somerset Air Svc"</span>    <span class="sc">~</span> <span class="st">"KSMQ"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># White Plains</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Flying Zebra"</span>        <span class="sc">~</span> <span class="st">"KHPN"</span>,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Morristown Muni</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"150th Aero"</span>          <span class="sc">~</span> <span class="st">"KMMU"</span>,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"American Flyers"</span>     <span class="sc">~</span> <span class="st">"KMMU"</span>,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Certified Flyers"</span>    <span class="sc">~</span> <span class="st">"KMMU"</span>,</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Trenton Mercer</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Infinity Flt Grp"</span>    <span class="sc">~</span> <span class="st">"KTTN"</span>,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Central Jersey (Hillsborough)</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"TriState Avn"</span>        <span class="sc">~</span> <span class="st">"47N"</span>,</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Mach 1 Pilots Assoc"</span> <span class="sc">~</span> <span class="st">"47N"</span>,</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Linden</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Luvsflying Flt Trn"</span>  <span class="sc">~</span> <span class="st">"KLDJ"</span>,</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Richmond Pilots"</span>     <span class="sc">~</span> <span class="st">"KLDJ"</span>,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Princeton</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Princeton Fl Schl"</span>   <span class="sc">~</span> <span class="st">"39N"</span>,</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Essex County/Caldwell</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Air Fleet Trn Sys"</span>   <span class="sc">~</span> <span class="st">"KCDW"</span>,</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Trenton-Robbinsville</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>      operator <span class="sc">==</span> <span class="st">"Air-Mods Flt Acdmy"</span>  <span class="sc">~</span> <span class="st">"N87"</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Lincoln Park/N07, Sussex/FWN</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(airport_base, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 11 × 2
    airport_base     n
    &lt;chr&gt;        &lt;int&gt;
@@ -288,8 +783,34 @@ requested file not found in the zip file</code></pre>
 11 KCDW             1</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details class="code-fold">
+<summary>Code: Add column for to/from airport</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can figure out where planes are heading to or from if they filed a flight plan.</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> airnoiseComplaints <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">airport_of_interest =</span> <span class="fu">case_when</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># If took off at one of these airports, use it instead of base</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(origin, <span class="fu">regex</span>(<span class="st">"K(CDW|EWR|JFK|LGA|MMU|TEB|SWF)"</span>))      <span class="sc">~</span> origin,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># If landing at one of these airports, use it instead of base or origin</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(destination, <span class="fu">regex</span>(<span class="st">"K(CDW|EWR|JFK|LGA|MMU|TEB|SWF)"</span>)) <span class="sc">~</span> destination,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># If the plane is known to be based somewhere locally, just use that.</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> airport_base</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the total number of observations</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>totalComplaints <span class="ot">&lt;-</span> <span class="fu">nrow</span>(airnoiseComplaints)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(airport_of_interest, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout html-fill-item html-fill-container">
 <pre><code># A tibble: 15 × 2
    airport_of_interest     n
    &lt;chr&gt;               &lt;int&gt;
@@ -310,56 +831,643 @@ requested file not found in the zip file</code></pre>
 15 KLGA                    1</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="AircraftActivity_files/figure-html/Visualize-traffic-by-number-of-observations-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
 </div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-6"><div class="card-body html-fill-item html-fill-container" data-title="VI. Specify Datatypes">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<p>To assist with analysis, we can transform the datatypes of several colum,ns to match information we understand about the data. For example, the <code>event_date</code> is a datetime taken from the Eastern time zone.</p>
 </div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<details open="" class="code-fold">
+<summary>Code: Specify data types</summary>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    airnoiseComplaints,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"event_date"</span>      <span class="ot">=</span> <span class="fu">mdy</span>(event_date, <span class="at">tz =</span> <span class="st">"EST"</span>),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"complaint_type"</span>  <span class="ot">=</span> <span class="fu">as_factor</span>(complaint_type),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"operation_type"</span>  <span class="ot">=</span> <span class="fu">as_factor</span>(operation_type),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"altitude_ft_msl"</span> <span class="ot">=</span> <span class="fu">as.integer</span>(altitude_ft_msl),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aircraft_type"</span>   <span class="ot">=</span> <span class="fu">as_factor</span>(aircraft_type),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aircraft_model"</span>  <span class="ot">=</span> <span class="fu">as_factor</span>(aircraft_model),</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin"</span>          <span class="ot">=</span> <span class="fu">as_factor</span>(origin),</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"destination"</span>     <span class="ot">=</span> <span class="fu">as_factor</span>(destination),</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"airport_base"</span>    <span class="ot">=</span> <span class="fu">as_factor</span>(airport_base)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div></div></div><bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div><div id="visualize-traffic-by-number-of-observations" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-visualize-traffic-by-number-of-observations">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="pltTrafficByNumberOfObservations" style="width:100%;height:400px;"></div>
+</div>
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="pltTrafficByBaseAirport" style="width:100%;height:400px;"></div>
+</div>
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="pltComplaintsByAirportOfInterest" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>This is a total of 1603 observations, during 41 days during which observations were recorded. The result is an average of 40 reports per day.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="AircraftActivity_files/figure-html/Visualize-traffic-by-base-airport-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
-</div>
-</section>
-<section id="are-we-sending-complaints-to-the-right-airport" class="level1">
-<h1>Are we sending complaints to the right airport?</h1>
+</div><div id="visualize-traffic-by-base-airport" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-visualize-traffic-by-base-airport">
+
+</div><div id="are-we-sending-complaints-to-the-right-airport" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-are-we-sending-complaints-to-the-right-airport">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>On 6/24/2024, Teterboro’s (KTEB) noise office reached out to report that our reports were showing many aircraft that were actually to or from Morristown (KMMU). Airnoise.io conveniently provides additional information from their flight plans, and the resulting visualization suggests that KTEB is indeed beyond KMMU in complaint volume coming from this location.</p>
 <p>Additional context may strengthen the value of this conclusion even further: if I understand correctly, complaints for KTEB are submitted through a PlaneNoise “webtrak” system, and these complaints are routed to the Port Authority. Other Port Authority airports include KEWR, KLGA, and KJFK, so after summing these complaints, the Port Authority is responsible for double the report volume of KMMU.</p>
-<div class="cell">
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+
+</div>
+</div>
+</div>
+</div>
+</div></div><aside id="bslib-sidebar-1" class="sidebar html-fill-container html-fill-item"><div class="html-fill-container html-fill-item">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="AircraftActivity_files/figure-html/Visualize-traffic-by-airport-of-interest-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="dates" class="shiny-date-range-input form-group shiny-input-container">
+<label class="control-label" id="dates-label" for="dates">Filter observations/complaints by date:</label>
+<div class="input-daterange input-group input-group-sm">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-26" data-initial-date="2010-01-01" data-date-autoclose="true">
+<span class="input-group-addon input-group-prepend input-group-append">
+<span class="input-group-text"> to </span>
+</span>
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-26" data-initial-date="2024-07-26" data-date-autoclose="true">
 </div>
 </div>
+</div>
+</div></aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-1">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="fill:currentColor;" aria-hidden="true" role="img">
+      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+    </svg>
+</button>
+<script data-bslib-sidebar-init="">
+bslib.Sidebar.initCollapsibleAll()
+</script>
 </div>
 <p>
-<script type="application/shiny-prerendered" data-context="server">
-output$distPlot <- renderPlot({
-   x <- faithful[, 2]  # Old Faithful Geyser data
-   bins <- seq(min(x), max(x), length.out = input$bins + 1)
-   hist(x, breaks = bins, col = 'darkgray', border = 'white',
-        xlab = 'Waiting time to next eruption (in mins)',
-        main = 'Histogram of waiting times')
-})
-</script>
- 
 <script type="application/shiny-prerendered" data-context="server-start">
-
+library(bslib)
 library(directlabels)
 library(tidyverse)
 library(RCurl)      # For downloading the FAA database
 library(shiny)      # For interactive plots
+library(svglite)
+library(svgPanZoom)
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-06-24.zip'
+
+airnoiseComplaints <- read_csv(anCsvFilesPath)
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+# How old can the file be before it needs to be re-downloaded?
+maxAgeDays <- 14
+
+# Specify the URL of the file you want to download
+faaUrl <- "https://registry.faa.gov/database/ReleasableAircraft.zip"
+
+# Specify the file name and location to save the file on your computer
+projectPath <- "E:\\Database\\Public Datasets\\FAA Aircraft List\\"
+archiveName <- "ReleasableAircraft.zip"
+extractPath <- paste0(projectPath,"\\ReleasableAircraft")
+archivePath <- paste0(projectPath, archiveName)
+ownershipCsvPath <- paste0(extractPath,"\\MASTER.txt")
+ownershipCsvNotExists <- !file.exists(ownershipCsvPath)
+
+# Function to assess how old file can be
+fileTooOld=function(maxAgeDays, path){
+  isTooOld <- file.mtime(path) <= now() - days(maxAgeDays)
+  return(isTooOld)
+}
+
+# Function to streamline download
+registryDownload=function(srcUrl, destPath){
+
+  # Download the FAA database
+  f = CFILE(destPath, mode="wb")
+  curlPerform(url = srcUrl, writedata = f@ref, noprogress = FALSE)
+  close(f)
+}
+
+if ( ownershipCsvNotExists || fileTooOld(maxAgeDays, ownershipCsvPath) ) {
+    registryDownload(faaUrl,archivePath)
+    unzip(archivePath,
+          files = "MASTER.txt",
+          exdir = extractPath,
+          overwrite = TRUE)
+}
+
+getOwners <- function() {
+  owners <- read_csv(
+    ownershipCsvPath,
+    trim_ws = TRUE,
+    name_repair = "unique_quiet",
+    show_col_types = FALSE,
+    # leave nothing to chance
+    col_select = c(
+      "hexId"          = "MODE S CODE HEX",
+      "nNumber"        = "N-NUMBER",
+      "serialNumber"   = "SERIAL NUMBER",
+      "mfrMdlCode"     = "MFR MDL CODE",
+      "engMfrMdl"      = "ENG MFR MDL",
+      "yearMfr"        = "YEAR MFR",
+      "typeRegistrant" = "TYPE REGISTRANT",
+      "owner"          = "NAME",
+      "street"         = "STREET",
+      "street2"        = "STREET2",
+      "city"           = "CITY",
+      "state"          = "STATE",
+      "zipCode"        = "ZIP CODE",
+      "region"         = "REGION",
+      "county"         = "COUNTY",
+      "country"        = "COUNTRY",
+      "lastActionDate" = "LAST ACTION DATE",
+      "certIssueDate"  = "CERT ISSUE DATE",
+      "certification"  = "CERTIFICATION",
+      "typeAircraft"   = "TYPE AIRCRAFT",
+      "typeEngine"     = "TYPE ENGINE",
+      "statusCode"     = "STATUS CODE",
+      "modeSCode"      = "MODE S CODE",
+      "fractOwner"     = "FRACT OWNER",
+      "airWorthDate"   = "AIR WORTH DATE",
+      "otherNames1"    = "OTHER NAMES(1)",
+      "otherNames2"    = "OTHER NAMES(2)",
+      "otherNames3"    = "OTHER NAMES(3)",
+      "otherNames4"    = "OTHER NAMES(4)",
+      "otherNames5"    = "OTHER NAMES(5)",
+      "expirationDate" = "EXPIRATION DATE",
+      "uniqueId"       = "UNIQUE ID",
+      "kitMfr"         = "KIT MFR",
+      "kitMdl"         = "KIT MODEL"
+    ),
+    col_types = list(
+      "N-NUMBER"         = col_character(),
+      "SERIAL NUMBER"    = col_character(),
+      "MFR MDL CODE"     = col_factor(),
+      "ENG MFR MDL"      = col_factor(),
+      "YEAR MFR"         = col_integer(),
+      "TYPE REGISTRANT"  = col_factor(),
+      "NAME"             = col_character(),
+      "STREET"           = col_character(),
+      "STREET2"          = col_character(),
+      "CITY"             = col_factor(),
+      "STATE"            = col_factor(),
+      "ZIP CODE"         = col_character(),
+      "REGION"           = col_factor(),
+      "COUNTY"           = col_factor(),
+      "COUNTRY"          = col_factor(),
+      "LAST ACTION DATE" = col_date(format = "%Y%m%d"),
+      "CERT ISSUE DATE"  = col_date(format = "%Y%m%d"),
+      "CERTIFICATION"    = col_factor(),
+      "TYPE AIRCRAFT"    = col_factor(),
+      "TYPE ENGINE"      = col_factor(),
+      "STATUS CODE"      = col_factor(),
+      "MODE S CODE"      = col_character(),
+      "FRACT OWNER"      = col_character(),
+      "AIR WORTH DATE"   = col_date(format = "%Y%m%d"),
+      "OTHER NAMES(1)"   = col_character(),
+      "OTHER NAMES(2)"   = col_character(),
+      "OTHER NAMES(3)"   = col_character(),
+      "OTHER NAMES(4)"   = col_character(),
+      "OTHER NAMES(5)"   = col_character(),
+      "EXPIRATION DATE"  = col_date(format = "%Y%m%d"),
+      "UNIQUE ID"        = col_character(),
+      "KIT MFR"          = col_factor(),
+      "KIT MODEL"        = col_factor(),
+      "MODE S CODE HEX"  = col_character()
+    )
+  )
+  return(owners)
+}
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+airnoiseComplaints <- drop_na(airnoiseComplaints, registration)
+
+# Repair some badly-named columns
+airnoiseComplaints <- airnoiseComplaints %>%
+  rename_with(
+    ~ tolower(str_replace_all(.x, " ", "_") %>%
+      str_remove_all("[()]"))
+    )
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+# Join these owner data with the aircraft seen.
+airnoiseComplaints <- left_join(
+  x = airnoiseComplaints,
+  # Prepend 'N' to FAA nNumber as these are all US registrations
+  y = mutate(.data = getOwners(), nNumber = paste0("N", nNumber)),
+  by = join_by(registration == nNumber), 
+)
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+airnoiseComplaints <- airnoiseComplaints %>%
+  mutate(
+    operator = case_when(
+      # Simple transforms
+      operator == "unknown" ~ owner, # copy the owner field if operator unknown
+      owner == "AMERIFLYERS OF TEXAS INC" ~ "American Flyers",             # School
+      owner == "BLUE SKY AVIATION ASSOCIATION INC" ~ "Blue Sky Avn Assoc", # Club
+      owner == "CERTIFIED AVIATION LLC" ~ "Certified Flyers",              # School
+      owner == "LUVSFLYING FLIGHT TRAINING LLC" ~ "Luvsflying Flt Trn",    # School
+      owner == "MACH 1 PILOTS ASSOCIATION INC" ~ "Mach 1 Pilots Assoc", # Club
+      owner == "RARITAN VALLEY FLYING SCHOOL" ~ "Princeton Fl Schl", # School
+      owner == "RICHMOND PILOTS CORP" ~ "Richmond Pilots",        # Club
+      owner == "RTD AVIATION LLC" ~ "TriState Avn",          # School
+      owner == "SKY AVIATION CORP" ~ "Sky Avn",        # Possibly an individual
+      # More complex cases
+      str_detect(
+        operator,
+        regex("^SOLBERG AV.*",
+              ignore_case=TRUE) ) ~
+        "Solberg Avn",       # School/rental
+      str_detect(
+        operator,
+        regex(".*GEORGE WALKER.*|^SOMERSET AIR.*",
+              ignore_case=TRUE) ) ~
+        "Somerset Air Svc",  # School/rental
+      str_detect(
+        operator,
+        regex("^FLYING ZEBRA.*",
+              ignore_case=TRUE) ) ~
+        "Flying Zebra",      # Charter
+      str_detect(
+        operator,
+        regex("^INFINITY FLIGHT G.*|^MUSTANG SALLY.*|^CHRISTIANSEN AV.*|^FOX LEASING.*|SVETFU[LR].*",
+              ignore_case=TRUE) ) ~
+        "Infinity Flt Grp",  # School
+      str_detect(
+        operator,
+        regex("^AA[ -]AERO",
+              ignore_case=TRUE) ) ~
+        "Air Fleet Trn Sys", # School, 14 a/c as of 6/25/24
+      str_detect(
+        operator,
+        regex("^AIR[- ]?MODS FLIGHT",
+              ignore_case=TRUE) ) ~
+        "Air-Mods Flt Acdmy", # School/rental
+      str_detect(
+        operator,
+        regex("150TH AERO.*",
+              ignore_case=TRUE) ) ~
+        "150th Aero", # Club
+      .default = operator    # leave it alone if no match found here
+    )
+  )
+
+airnoiseComplaints %>% count(operator, sort = TRUE)
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+# Some aircraft or operators have a known base of operations. We create a new column for that.
+
+airnoiseComplaints <- airnoiseComplaints %>%
+  mutate(
+    airport_base = case_when(
+      # Solberg (Readington)
+      operator == "Solberg Avn"         ~ "N51",
+      operator == "Blue Sky Avn Assoc"  ~ "N51",
+      operator == "Sky Avn"             ~ "N51",
+      # Somerset
+      operator == "Somerset Air Svc"    ~ "KSMQ",
+      # White Plains
+      operator == "Flying Zebra"        ~ "KHPN",
+      # Morristown Muni
+      operator == "150th Aero"          ~ "KMMU",
+      operator == "American Flyers"     ~ "KMMU",
+      operator == "Certified Flyers"    ~ "KMMU",
+      # Trenton Mercer
+      operator == "Infinity Flt Grp"    ~ "KTTN",
+      # Central Jersey (Hillsborough)
+      operator == "TriState Avn"        ~ "47N",
+      operator == "Mach 1 Pilots Assoc" ~ "47N",
+      # Linden
+      operator == "Luvsflying Flt Trn"  ~ "KLDJ",
+      operator == "Richmond Pilots"     ~ "KLDJ",
+      # Princeton
+      operator == "Princeton Fl Schl"   ~ "39N",
+      # Essex County/Caldwell
+      operator == "Air Fleet Trn Sys"   ~ "KCDW",
+      # Trenton-Robbinsville
+      operator == "Air-Mods Flt Acdmy"  ~ "N87"
+      # Lincoln Park/N07, Sussex/FWN
+    )
+  )
+
+airnoiseComplaints %>% count(airport_base, sort = TRUE)
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+# We can figure out where planes are heading to or from if they filed a flight plan.
+
+airnoiseComplaints <- airnoiseComplaints %>%
+  mutate(airport_of_interest = case_when(
+      # If took off at one of these airports, use it instead of base
+      str_detect(origin, regex("K(CDW|EWR|JFK|LGA|MMU|TEB|SWF)"))      ~ origin,
+      # If landing at one of these airports, use it instead of base or origin
+      str_detect(destination, regex("K(CDW|EWR|JFK|LGA|MMU|TEB|SWF)")) ~ destination,
+      # If the plane is known to be based somewhere locally, just use that.
+      .default = airport_base
+    )
+  )
+
+# Get the total number of observations
+totalComplaints <- nrow(airnoiseComplaints)
+
+airnoiseComplaints %>% count(airport_of_interest, sort = TRUE)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="data">
+airnoiseComplaints <-
+  mutate(
+    airnoiseComplaints,
+    "event_date"      = mdy(event_date, tz = "EST"),
+    "complaint_type"  = as_factor(complaint_type),
+    "operation_type"  = as_factor(operation_type),
+    "altitude_ft_msl" = as.integer(altitude_ft_msl),
+    "aircraft_type"   = as_factor(aircraft_type),
+    "aircraft_model"  = as_factor(aircraft_model),
+    "origin"          = as_factor(origin),
+    "destination"     = as_factor(destination),
+    "airport_base"    = as_factor(airport_base)
+  )
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+filterAirnoiseComplaints <- reactive({
+  airnoiseComplaints %>%
+    filter(between(event_date,
+                  left=ymd(input$dates[1]),
+                  right=ymd(input$dates[2])
+                  )
+            )
+  })
+
+output$datesAsText <- renderText({
+  paste("you have selected", input$dates)
+  })
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+complaintsByOperator <- reactive({
+  filterAirnoiseComplaints() %>%
+  group_by(operator) %>%
+  count(name = "nSightings") %>%
+  mutate(percentage = nSightings / totalComplaints * 100) %>%
+  # Exclude null/NA names and anything accounting for under .7%
+  filter(percentage > .7 && !is.na(operator))
+})
+
+output$pltTrafficByNumberOfObservations <- renderPlot({
+  p <- complaintsByOperator() %>%
+  ggplot(aes(x=reorder(operator, nSightings), y=nSightings) ) +
+  geom_segment(
+    aes(
+      linewidth = 2,
+      x=reorder(operator, nSightings),
+      xend=operator,
+      y=0,
+      yend=nSightings,
+      color = nSightings
+    )
+  ) +
+  # geom_point(size=3, aes(color=nSightings)) +
+  coord_flip() +
+  theme(
+    panel.background = element_rect(fill = "gray75"),
+    # panel.grid = element_line(color = "black"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(.95, .05),
+    legend.justification = c(1, 0),
+    legend.key = element_rect(fill = NA),
+  ) +
+  scale_color_viridis_c(
+    name = NULL,
+    option = "viridis",
+    direction = 1
+  ) +
+  xlab("Operator") +
+  ylab("# of complaints") +
+  labs(
+    title = "Number of Sightings by Operator",
+    subtitle = str_glue_data(
+      .x = filterAirnoiseComplaints(),
+      "Top Operators {min(event_date)} - {max(event_date)}"
+    )
+  )
+  p
+})
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+complaintsByBaseAirport <- reactive({
+  filterAirnoiseComplaints() %>%
+  group_by(airport_base) %>%
+  count(name = "nSightings") %>%
+  mutate(percentage = nSightings / totalComplaints * 100)
+})
+
+output$pltTrafficByBaseAirport <- renderPlot({
+  p <- complaintsByBaseAirport() %>%
+  filter(!is.na(airport_base)) %>% # Exclude null/NA airports
+  ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
+    geom_segment(
+      aes(
+        color = nSightings,
+        x=reorder(airport_base, nSightings),
+        xend=airport_base,
+        y=0,
+        yend=nSightings
+      )
+    ) +
+    # geom_point(aes(size=3, color=nSightings)) +
+    coord_flip() +
+    theme(
+      panel.background = element_rect(fill = "gray75"),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      legend.position="none"
+    ) +
+    scale_color_viridis_c(
+      name = NULL,
+      option = "viridis",
+      direction = 1
+    ) +
+    xlab("Based at") +
+    ylab("# of complaints") +
+    labs(
+      title = "Number of Complaints by Base Airport",
+      subtitle = str_glue_data(
+        .x = filterAirnoiseComplaints(),
+        "Top Airports {min(event_date)} - {max(event_date)}"
+      )
+    ) +
+    annotate(
+      geom = "label",
+      x = 3,
+      y = totalComplaints / 7,
+      label = str_glue_data(
+        .x = complaintsByBaseAirport,
+        "We were unable to determine the home base of the\n",
+        "aircraft involved in {sum(is.na(airport_base))}",
+        " of {totalComplaints} complaints (",
+        "{round(sum(is.na(airport_base)) / totalComplaints * 100)}%)"
+        ),
+      hjust = "right"
+    )
+  p
+})
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+complaintsByOriginOrDest <- reactive({
+  filterAirnoiseComplaints() %>%
+  group_by(airport_of_interest) %>%
+  # add a count of sightings per airport
+  count(name = "nSightings", sort = TRUE) %>%
+  # reorder by number of sightings
+  arrange(nSightings) %>%
+  # add percentages and tag whether they're within PANYNJ jurisdiction
+  mutate(percentage = nSightings / totalComplaints * 100,
+         port_authority_affiliate = str_detect(
+           airport_of_interest,
+           "K(EWR|TEB|JFK|LGA|SWF)"
+           ),
+         ) %>%
+  # remove rows where we don't know about the airport
+  filter(!is.na(airport_of_interest))
+})
+
+output$pltComplaintsByAirportOfInterest <- renderPlot({
+  p <- complaintsByOriginOrDest() %>%
+  ggplot(aes(x=reorder(airport_of_interest, nSightings),
+      y=nSightings,
+      color=!port_authority_affiliate
+      )
+    ) +
+  coord_flip() +
+  geom_segment(
+    aes(
+      linewidth = 2,
+      x = ,
+      xend = airport_of_interest,
+      y = 0,
+      yend = nSightings
+    ),
+    show.legend = FALSE
+    ) +
+  # geom_point(size=4) +
+  theme(
+    panel.background = element_rect(fill = "darkgray"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(.95, .5),
+    legend.justification = c(1, .5),
+    legend.key = element_rect(fill = NA),
+    ) +
+  scale_color_viridis_d(
+    name = NULL,
+    option = "viridis",
+    direction = -1,
+    labels = c("PANYNJ affiliate", "not affiliated")
+    ) +
+  xlab("Flying to or from") +
+  ylab("# of complaints") +
+  labs(
+    title = "Number of Sightings by Origin or Destination Airport",
+    subtitle = str_glue_data(
+      .x = filterAirnoiseComplaints(),
+      "Top Airports {min(event_date)} - {max(event_date)}")
+    ) +
+  annotate(
+    geom = "label",
+    x = 2,
+    y = max(complaintsByOriginOrDest$nSightings),
+    label = str_glue_data(.x = filterAirnoiseComplaints(),
+      "We were unable to determine the\n",
+      "origin or destination of the aircraft\n",
+      "involved in {sum(is.na(airport_of_interest))}",
+      "of {totalComplaints} complaints (",
+      "{round(sum(is.na(airport_of_interest)) / totalComplaints * 100)}%)"
+      ),
+    hjust = "right")
+    p
+})
 
 </script>
  
@@ -392,18 +1500,16 @@ ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
 </p>
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
-{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ionrangeslider-javascript"]},{"type":"character","attributes":{},"value":["2.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/ionrangeslider"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/ion.rangeSlider.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.8.1.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["strftime"]},{"type":"character","attributes":{},"value":["0.9.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/strftime"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["strftime-min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.8.1.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ionrangeslider-css"]},{"type":"character","attributes":{},"value":["2.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/ionrangeslider"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/ion.rangeSlider.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.8.1.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]}]}
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap-datepicker-js"]},{"type":"character","attributes":{},"value":["1.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/datepicker"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/bootstrap-datepicker.min.js"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["<script>(function() {\n        var datepicker = $.fn.datepicker.noConflict();\n        $.fn.bsDatepicker = datepicker;\n      })();\n     <\/script>"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.8.1.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap-datepicker-css"]},{"type":"character","attributes":{},"value":["1.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/datepicker"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/bootstrap-datepicker3.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.8.1.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]}]}
 </script>
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77]}},"value":[{"type":"character","attributes":{},"value":["base","bit","bit64","bitops","bslib","cachem","cli","colorspace","compiler","crayon","datasets","digest","directlabels","dplyr","evaluate","fansi","farver","fastmap","forcats","generics","ggplot2","glue","graphics","grDevices","grid","gtable","hms","htmltools","htmlwidgets","httpuv","jquerylib","jsonlite","knitr","labeling","later","lifecycle","lubridate","magrittr","memoise","methods","mime","munsell","parallel","pillar","pkgconfig","promises","purrr","quadprog","R6","Rcpp","RCurl","readr","rlang","rmarkdown","rstudioapi","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","viridisLite","vroom","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["4.4.1","4.0.5","4.0.5","1.0-7","0.7.0","1.1.0","3.6.2","2.1-0","4.4.1","1.5.3","4.4.1","0.6.35","2024.1.21","1.1.4","0.24.0","1.0.6","2.1.2","1.2.0","1.0.0","0.1.3","3.5.1","1.7.0","4.4.1","4.4.1","4.4.1","0.3.5","1.1.3","0.5.8.1","1.6.4","1.6.15","0.1.4","1.8.8","1.47","0.4.3","1.3.2","1.0.4","1.9.3","2.0.3","2.0.1","4.4.1","0.12","0.5.1","4.4.1","1.9.0","2.0.3","1.3.0","1.0.2","1.5-8","2.5.1","1.0.12","1.98-1.14","2.1.5","1.1.4","2.27","0.16.0","0.4.9","1.3.0","1.8.1.1","4.4.1","1.8.4","1.5.1","3.2.1","1.3.1","1.2.1","2.0.0","0.3.0","4.4.1","0.4.0","1.2.4","4.4.1","0.6.5","0.4.2","1.6.5","3.0.0","0.45","1.8-4","2.3.8"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76]}},"value":[{"type":"character","attributes":{},"value":["base","bit","bit64","bitops","bslib","cachem","cli","colorspace","compiler","crayon","datasets","digest","directlabels","dplyr","evaluate","fansi","fastmap","forcats","generics","ggplot2","glue","graphics","grDevices","grid","gtable","hms","htmltools","htmlwidgets","httpuv","jquerylib","jsonlite","knitr","later","lifecycle","lubridate","magrittr","memoise","methods","mime","munsell","parallel","pillar","pkgconfig","promises","purrr","quadprog","R6","Rcpp","RCurl","readr","rlang","rmarkdown","sass","scales","shiny","stats","stringi","stringr","svglite","svgPanZoom","systemfonts","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","vroom","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["4.4.1","4.0.5","4.0.5","1.0-7","0.7.0","1.1.0","3.6.2","2.1-0","4.4.1","1.5.3","4.4.1","0.6.35","2024.1.21","1.1.4","0.24.0","1.0.6","1.2.0","1.0.0","0.1.3","3.5.1","1.7.0","4.4.1","4.4.1","4.4.1","0.3.5","1.1.3","0.5.8.1","1.6.4","1.6.15","0.1.4","1.8.8","1.47","1.3.2","1.0.4","1.9.3","2.0.3","2.0.1","4.4.1","0.12","0.5.1","4.4.1","1.9.0","2.0.3","1.3.0","1.0.2","1.5-8","2.5.1","1.0.12","1.98-1.14","2.1.5","1.1.4","2.27","0.4.9","1.3.0","1.8.1.1","4.4.1","1.8.4","1.5.1","2.1.3","0.3.4","1.1.0","3.2.1","1.3.1","1.2.1","2.0.0","0.3.0","4.4.1","0.4.0","1.2.4","4.4.1","0.6.5","1.6.5","3.0.0","0.45","1.8-4","2.3.8"]}]}]}
 </script>
 <!--/html_preserve-->
-</section>
 
-</main>
-<!-- /main column -->
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -813,8 +1919,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-</div> <!-- /content -->
+</div> <!-- /container fluid -->
 
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
 
 
 
