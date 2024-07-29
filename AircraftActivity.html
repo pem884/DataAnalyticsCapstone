@@ -1465,8 +1465,10 @@ output$pltComplaintsByAirportOfInterest <- renderPlot({
       "of {totalComplaints} complaints (",
       "{round(sum(is.na(airport_of_interest)) / totalComplaints * 100)}%)"
       ),
-    hjust = "right")
-    p
+    hjust = "right",
+    vjust = "bottom"
+  )
+  p
 })
 
 </script>
