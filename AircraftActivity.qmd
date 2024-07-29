@@ -746,7 +746,7 @@ output$pltTrafficByBaseAirport <- renderPlot({
       x = 3,
       y = totalComplaints / 7,
       label = str_glue_data(
-        .x = complaintsByBaseAirport,
+        .x = complaintsByBaseAirport(),
         "We were unable to determine the home base of the\n",
         "aircraft involved in {sum(is.na(airport_base))}",
         " of {totalComplaints} complaints (",
