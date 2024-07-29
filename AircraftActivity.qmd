@@ -831,7 +831,7 @@ output$pltComplaintsByAirportOfInterest <- renderPlot({
   annotate(
     geom = "label",
     x = 2,
-    y = max(complaintsByOriginOrDest$nSightings),
+    y = max(complaintsByOriginOrDest()$nSightings),
     label = str_glue_data(.x = filterAirnoiseComplaints(),
       "We were unable to determine the\n",
       "origin or destination of the aircraft\n",
