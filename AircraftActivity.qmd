@@ -713,6 +713,7 @@ output$pltTrafficByBaseAirport <- renderPlot({
     geom_segment(
       aes(
         color = nSightings,
+        linewidth = 2,
         x=reorder(airport_base, nSightings),
         xend=airport_base,
         y=0,
