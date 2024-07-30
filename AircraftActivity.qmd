@@ -13,7 +13,7 @@ format:
 server: shiny
 ---
 
-```{r}
+```{r Env-Setup}
 #| context: setup
 #| eval: true
 #| include: false
@@ -62,7 +62,7 @@ dateRangeInput("dates",
 :::{.card title="1- Libraries used"}
 We rely on the tidyverse to work with our data and `RCurl` to get a current version of the FAA ownership database.
 
-```{r Env-Setup}
+```{r Env-Setup-Dummy}
 #| context: setup
 #| eval: false
 #| echo: true
