@@ -680,8 +680,8 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
     )
   ) +
   guides(
-   color = guide_colorbar(),
-   linewidth = "none"
+   color = "colorbar",
+   linewidth = "legend"
    ) +
   # geom_point(size=3, aes(color=nSightings)) +
   coord_flip() +
