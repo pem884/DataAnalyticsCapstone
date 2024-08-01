@@ -943,11 +943,11 @@ grid-auto-rows: minmax(0, 1fr);">
 <div id="dates" class="shiny-date-range-input form-group shiny-input-container">
 <label class="control-label" id="dates-label" for="dates">Filter observations/complaints by date:</label>
 <div class="input-daterange input-group input-group-sm">
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-29" data-initial-date="2010-01-01" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-31" data-initial-date="2010-01-01" data-date-autoclose="true">
 <span class="input-group-addon input-group-prepend input-group-append">
 <span class="input-group-text"> to </span>
 </span>
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-29" data-initial-date="2024-07-29" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-31" data-initial-date="2024-07-31" data-date-autoclose="true">
 </div>
 </div>
 </div>
@@ -1301,6 +1301,10 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
       color = nSightings
     )
   ) +
+  guides(
+   color = guide_colorbar(),
+   linewidth = "none"
+   ) +
   # geom_point(size=3, aes(color=nSightings)) +
   coord_flip() +
   theme(
