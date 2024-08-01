@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
 <div class="tab-content bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="columns" data-scrolling="true" aria-labelledby="tab-set-up-environment">
+<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-scrolling="true" data-orientation="columns" aria-labelledby="tab-set-up-environment">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
 <div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
@@ -962,11 +962,11 @@ grid-auto-rows: minmax(0, 1fr);">
 <div id="dates" class="shiny-date-range-input form-group shiny-input-container">
 <label class="control-label" id="dates-label" for="dates">Filter observations/complaints by date:</label>
 <div class="input-daterange input-group input-group-sm">
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-31" data-initial-date="2010-01-01" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-01" data-initial-date="2010-01-01" data-date-autoclose="true">
 <span class="input-group-addon input-group-prepend input-group-append">
 <span class="input-group-text"> to </span>
 </span>
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-07-31" data-initial-date="2024-07-31" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-01" data-initial-date="2024-08-01" data-date-autoclose="true">
 </div>
 </div>
 </div>
@@ -1311,8 +1311,8 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
   p <- complaintsByOperator() %>%
   ggplot(aes(x=reorder(operator, nSightings), y=nSightings) ) +
   geom_segment(
+    linewidth = 2,
     aes(
-      linewidth = 2,
       x=reorder(operator, nSightings),
       xend=operator,
       y=0,
@@ -1321,8 +1321,8 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
     )
   ) +
   guides(
-   color = guide_colorbar(),
-   linewidth = "none"
+   color = "colorbar",
+   linewidth = "legend"
    ) +
   # geom_point(size=3, aes(color=nSightings)) +
   coord_flip() +
@@ -1368,9 +1368,9 @@ output$pltTrafficByBaseAirport <- renderPlot({
   filter(!is.na(airport_base)) %>% # Exclude null/NA airports
   ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
     geom_segment(
+      linewidth = 2,
       aes(
         color = nSightings,
-        linewidth = 2,
         x=reorder(airport_base, nSightings),
         xend=airport_base,
         y=0,
@@ -1445,8 +1445,8 @@ output$pltComplaintsByAirportOfInterest <- renderPlot({
     ) +
   coord_flip() +
   geom_segment(
+    linewidth = 2,
     aes(
-      linewidth = 2,
       x = ,
       xend = airport_of_interest,
       y = 0,
