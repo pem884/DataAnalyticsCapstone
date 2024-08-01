@@ -50,6 +50,13 @@ dateRangeInput("dates",
 #                 end = max(airnoiseComplaints$event_date)
 #                )
 
+br()
+
+sliderInput("lineWidthSelection",
+            "With of bars for plots",
+            min=1, max=15,
+            value=10
+          )
 
 ```
 
@@ -670,7 +677,7 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
   p <- complaintsByOperator() %>%
   ggplot(aes(x=reorder(operator, nSightings), y=nSightings) ) +
   geom_segment(
-    linewidth = 2,
+    linewidth = input$lineWidthSelection,
     aes(
       x=reorder(operator, nSightings),
       xend=operator,
@@ -730,7 +737,7 @@ output$pltTrafficByBaseAirport <- renderPlot({
   filter(!is.na(airport_base)) %>% # Exclude null/NA airports
   ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
     geom_segment(
-      linewidth = 2,
+      linewidth = input$lineWidthSelection,
       aes(
         color = nSightings,
         x=reorder(airport_base, nSightings),
@@ -809,7 +816,7 @@ output$pltComplaintsByAirportOfInterest <- renderPlot({
     ) +
   coord_flip() +
   geom_segment(
-    linewidth = 2,
+    linewidth = input$lineWidthSelection,
     aes(
       x = ,
       xend = airport_of_interest,
