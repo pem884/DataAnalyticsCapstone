@@ -608,11 +608,29 @@ airnoiseComplaints <-
 
 # Visualize traffic by number of observations
 
-```{r}
+```{r Output-plot-traffic-by-number-of-observations}
 
 plotOutput("pltTrafficByNumberOfObservations")
 
+```
+
+This is a total of 1603 observations, during 41 days during which observations were recorded. The result is an average of 40 reports per day.
+
+# Visualize traffic by base airport
+
+```{r Output-plot-traffic-by-base-airport}
+
 plotOutput("pltTrafficByBaseAirport")
+
+```
+
+# Are we sending complaints to the right airport?
+
+On 6/24/2024, Teterboro's (KTEB) noise office reached out to report that our reports were showing many aircraft that were actually to or from Morristown (KMMU). Airnoise.io conveniently provides additional information from their flight plans, and the resulting visualization suggests that KTEB is indeed beyond KMMU in complaint volume coming from this location.
+
+Additional context may strengthen the value of this conclusion even further: if I understand correctly, complaints for KTEB are submitted through a PlaneNoise "webtrak" system, and these complaints are routed to the Port Authority. Other Port Authority airports include KEWR, KLGA, and KJFK, so after summing these complaints, the Port Authority is responsible for double the report volume of KMMU.
+
+```{r Output-plot-traffic-by-airport-of-interest}
 
 plotOutput("pltComplaintsByAirportOfInterest")
 
@@ -636,7 +654,7 @@ output$datesAsText <- renderText({
 
 ```
 
-```{r Visualize-traffic-by-number-of-observations}
+```{r Define-plot-traffic-by-number-of-observations}
 #| context: server
 
 complaintsByOperator <- reactive({
@@ -696,11 +714,8 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
 
 ```
 
-This is a total of 1603 observations, during 41 days during which observations were recorded. The result is an average of 40 reports per day.
 
-# Visualize traffic by base airport
-
-```{r Visualize-traffic-by-base-airport}
+```{r Define-plot-traffic-by-base-airport}
 #| context: server
 
 complaintsByBaseAirport <- reactive({
@@ -764,13 +779,7 @@ output$pltTrafficByBaseAirport <- renderPlot({
 
 ```
 
-# Are we sending complaints to the right airport?
-
-On 6/24/2024, Teterboro's (KTEB) noise office reached out to report that our reports were showing many aircraft that were actually to or from Morristown (KMMU). Airnoise.io conveniently provides additional information from their flight plans, and the resulting visualization suggests that KTEB is indeed beyond KMMU in complaint volume coming from this location.
-
-Additional context may strengthen the value of this conclusion even further: if I understand correctly, complaints for KTEB are submitted through a PlaneNoise "webtrak" system, and these complaints are routed to the Port Authority. Other Port Authority airports include KEWR, KLGA, and KJFK, so after summing these complaints, the Port Authority is responsible for double the report volume of KMMU.
-
-```{r Visualize-traffic-by-airport-of-interest}
+```{r Define-plot-traffic-by-airport-of-interest}
 #| context: server
 
 complaintsByOriginOrDest <- reactive({
