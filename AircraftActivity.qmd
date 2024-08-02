@@ -50,6 +50,8 @@ dateRangeInput("dates",
 #                 end = max(airnoiseComplaints$event_date)
 #                )
 
+textOutput('dataSelectedStatisticsText')
+
 br()
 
 sliderInput("lineWidthSelection",
@@ -621,8 +623,6 @@ plotOutput("pltTrafficByNumberOfObservations")
 
 ```
 
-This is a total of 1603 observations, during 41 days during which observations were recorded. The result is an average of 40 reports per day.
-
 # Visualize traffic by base airport
 
 ```{r Output-plot-traffic-by-base-airport}
@@ -657,9 +657,15 @@ filterAirnoiseComplaints <- reactive({
 
 filteredComplaints <- reactive({ nrow(filterAirnoiseComplaints()) })
 
-output$datesAsText <- renderText({
-  paste("you have selected", input$dates)
-  })
+output$dataSelectedStatisticsText <- renderText({
+  str_glue(
+    "This filter results in a total of {filteredComplaints()} ",
+    "observations, during {dayCount} days.",
+    "The result is an average of {avgReports} reports per day.",
+    dayCount = dataSelectedInterval() / days(1),
+    avgReports = round(filteredComplaints() / dayCount, digits = 1)
+  )
+})
 
 ```
 
