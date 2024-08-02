@@ -646,14 +646,16 @@ plotOutput("pltComplaintsByAirportOfInterest")
 ```{r Shiny-Server}
 #| context: server
 
+dataStartDate <- reactive({ input$dates[1] })
+dataEndDate <- reactive({ input$dates[2] })
+dataSelectedInterval <- reactive({ dataStartDate() %--% dataEndDate() })
+
 filterAirnoiseComplaints <- reactive({
   airnoiseComplaints %>%
-    filter(between(event_date,
-                  left=ymd(input$dates[1]),
-                  right=ymd(input$dates[2])
-                  )
-            )
-  })
+    filter(event_date %within% dataSelectedInterval())
+})
+
+filteredComplaints <- reactive({ nrow(filterAirnoiseComplaints()) })
 
 output$datesAsText <- renderText({
   paste("you have selected", input$dates)
