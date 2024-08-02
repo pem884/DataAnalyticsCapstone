@@ -55,7 +55,7 @@ textOutput('dataSelectedStatisticsText')
 br()
 
 sliderInput("lineWidthSelection",
-            "With of bars for plots",
+            "Width of bars for plots",
             min=1, max=15,
             value=10
           )
