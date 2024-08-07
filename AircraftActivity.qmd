@@ -39,7 +39,8 @@ dateRangeInput("dates",
                 min = mdy("1/1/2010"),
                 max = Sys.Date(),
                 start = mdy("1/1/2010"),
-                end = Sys.Date()
+                end = Sys.Date(),
+                format = "m/d/yy"
                )
 
 textOutput('dataSelectedStatisticsText')
