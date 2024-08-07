@@ -39,16 +39,9 @@ dateRangeInput("dates",
                 min = mdy("1/1/2010"),
                 max = Sys.Date(),
                 start = mdy("1/1/2010"),
-                end = Sys.Date()
+                end = Sys.Date(),
+                format = "m/d/yy"
                )
-
-# dateRangeInputOriginal("datesOriginal",
-#                 "Filter observations/complaints by date:",
-#                 min = min(airnoiseComplaints$event_date),
-#                 max = max(airnoiseComplaints$event_date),
-#                 start = min(airnoiseComplaints$event_date),
-#                 end = max(airnoiseComplaints$event_date)
-#                )
 
 textOutput('dataSelectedStatisticsText')
 
@@ -645,6 +638,16 @@ plotOutput("pltComplaintsByAirportOfInterest")
 
 ```{r Shiny-Server}
 #| context: server
+
+# First, update the dateRangeInput to match the actual data limits:
+updateDateRangeInput("dates",
+                session = session,
+                "Filter observations/complaints by date:",
+                min = min(airnoiseComplaints$event_date),
+                max = max(airnoiseComplaints$event_date),
+                start = min(airnoiseComplaints$event_date),
+                end = max(airnoiseComplaints$event_date)
+               )
 
 dataStartDate <- reactive({ input$dates[1] })
 dataEndDate <- reactive({ input$dates[2] })
