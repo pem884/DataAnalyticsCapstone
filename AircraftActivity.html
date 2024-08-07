@@ -952,11 +952,11 @@ grid-auto-rows: minmax(0, 1fr);">
 <div id="dates" class="shiny-date-range-input form-group shiny-input-container">
 <label class="control-label" id="dates-label" for="dates">Filter observations/complaints by date:</label>
 <div class="input-daterange input-group input-group-sm">
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-02" data-initial-date="2010-01-01" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-07" data-initial-date="2010-01-01" data-date-autoclose="true">
 <span class="input-group-addon input-group-prepend input-group-append">
 <span class="input-group-text"> to </span>
 </span>
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-02" data-initial-date="2024-08-02" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-07" data-initial-date="2024-08-07" data-date-autoclose="true">
 </div>
 </div>
 </div>
@@ -1284,6 +1284,16 @@ airnoiseComplaints <-
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
+# First, update the dateRangeInput to match the actual data limits:
+updateDateRangeInput("dates",
+                session = session,
+                "Filter observations/complaints by date:",
+                min = min(airnoiseComplaints$event_date),
+                max = max(airnoiseComplaints$event_date),
+                start = min(airnoiseComplaints$event_date),
+                end = max(airnoiseComplaints$event_date)
+               )
+
 dataStartDate <- reactive({ input$dates[1] })
 dataEndDate <- reactive({ input$dates[2] })
 dataSelectedInterval <- reactive({ dataStartDate() %--% dataEndDate() })
