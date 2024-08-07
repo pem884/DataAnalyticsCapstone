@@ -653,6 +653,8 @@ dataStartDate <- reactive({ input$dates[1] })
 dataEndDate <- reactive({ input$dates[2] })
 dataSelectedInterval <- reactive({ dataStartDate() %--% dataEndDate() })
 
+portAuthorityAirportsRegex <- "K(EWR|TEB|JFK|LGA|SWF)"
+
 filterAirnoiseComplaints <- reactive({
   airnoiseComplaints %>%
     filter(event_date %within% dataSelectedInterval())
@@ -811,7 +813,7 @@ complaintsByOriginOrDest <- reactive({
   mutate(percentage = nSightings / totalComplaints * 100,
          port_authority_affiliate = str_detect(
            airport_of_interest,
-           "K(EWR|TEB|JFK|LGA|SWF)"
+           portAuthorityAirportsRegex,
            ),
          ) %>%
   # remove rows where we don't know about the airport
