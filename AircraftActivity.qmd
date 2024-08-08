@@ -47,6 +47,14 @@ textOutput('dataSelectedStatisticsText')
 
 br()
 
+sliderInput("numberOfTopResultsToPlot",
+            "Only show the top 'n' results, where n is:",
+            min=5, max=15,
+            value=10
+          )
+
+br()
+
 sliderInput("lineWidthSelection",
             "Width of bars for plots",
             min=1, max=15,
@@ -694,7 +702,9 @@ complaintsByOperator <- reactive({
   count(name = "nSightings") %>%
   mutate(percentage = nSightings / totalComplaints * 100) %>%
   # Exclude null/NA names and anything accounting for under .7%
-  filter(percentage > .7 && !is.na(operator))
+  # filter(percentage > .7 && !is.na(operator))
+  filter( !is.na(operator) ) %>%
+  head(input$numberOfTopResultsToPlot)
 })
 
 output$pltTrafficByNumberOfObservations <- renderPlot({
@@ -754,7 +764,8 @@ complaintsByBaseAirport <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(airport_base) %>%
   count(name = "nSightings") %>%
-  mutate(percentage = nSightings / totalComplaints * 100)
+  mutate(percentage = nSightings / totalComplaints * 100) %>%
+  head(input$numberOfTopResultsToPlot)
 })
 
 output$pltTrafficByBaseAirport <- renderPlot({
@@ -830,7 +841,8 @@ complaintsByOriginOrDest <- reactive({
            ),
          ) %>%
   # remove rows where we don't know about the airport
-  filter(!is.na(airport_of_interest))
+  filter(!is.na(airport_of_interest)) %>%
+  head(input$numberOfTopResultsToPlot)
 })
 
 output$pltComplaintsByAirportOfInterest <- renderPlot({
