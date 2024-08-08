@@ -1483,20 +1483,18 @@ complaintsByOriginOrDest <- reactive({
 output$pltComplaintsByAirportOfInterest <- renderPlot({
   plotFontSize()
   p <- complaintsByOriginOrDest() %>%
-    ggplot(aes(x=reorder(airport_of_interest, nSightings),
-        y=nSightings,
+    ggplot(
+      aes(
+        x=reorder(airport_of_interest, nSightings),
+        xend = airport_of_interest,
+        y = 0,
+        yend = nSightings,
         color=!port_authority_affiliate
         )
       ) +
     coord_flip() +
     geom_segment(
       linewidth = input$lineWidthSelection,
-      aes(
-        x = ,
-        xend = airport_of_interest,
-        y = 0,
-        yend = nSightings
-      ),
       show.legend = FALSE
       ) +
     # geom_point(size=4) +
