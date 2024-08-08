@@ -701,9 +701,6 @@ complaintsByOperator <- reactive({
   group_by(operator) %>%
   count(name = "nSightings", sort = TRUE) %>%
   mutate(percentage = nSightings / totalComplaints * 100) %>%
-  # Exclude null/NA names and anything accounting for under .7%
-  # filter(percentage > .7 && !is.na(operator))
-  filter( !is.na(operator) ) %>%
   head(input$numberOfTopResultsToPlot)
 })
 
