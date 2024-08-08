@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
 <div class="tab-content bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-scrolling="true" data-orientation="columns" aria-labelledby="tab-set-up-environment">
+<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="columns" data-scrolling="true" aria-labelledby="tab-set-up-environment">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
 <div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
@@ -601,7 +601,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div class="card flow bslib-card html-fill-container" data-fill="false" data-title="Special Case" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card flow bslib-card html-fill-container" data-title="Special Case" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-header"><div class="card-title html-fill-item html-fill-container">Special Case</div></div>
 <div class="card-body html-fill-item html-fill-container">
 <p>Some sources suggest that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to assume they’re all being operated as training flights by Infinity Flight group for our analysis.</p>
@@ -952,11 +952,11 @@ grid-auto-rows: minmax(0, 1fr);">
 <div id="dates" class="shiny-date-range-input form-group shiny-input-container">
 <label class="control-label" id="dates-label" for="dates">Filter observations/complaints by date:</label>
 <div class="input-daterange input-group input-group-sm">
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: m/d/yy" data-date-language="en" data-date-week-start="0" data-date-format="m/d/yy" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-07" data-initial-date="2010-01-01" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: m/d/yy" data-date-language="en" data-date-week-start="0" data-date-format="m/d/yy" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-08" data-initial-date="2010-01-01" data-date-autoclose="true">
 <span class="input-group-addon input-group-prepend input-group-append">
 <span class="input-group-text"> to </span>
 </span>
-<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: m/d/yy" data-date-language="en" data-date-week-start="0" data-date-format="m/d/yy" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-07" data-initial-date="2024-08-07" data-date-autoclose="true">
+<input class="form-control" type="text" aria-labelledby="dates-label" title="Date format: m/d/yy" data-date-language="en" data-date-week-start="0" data-date-format="m/d/yy" data-date-start-view="month" data-min-date="2010-01-01" data-max-date="2024-08-08" data-initial-date="2024-08-08" data-date-autoclose="true">
 </div>
 </div>
 </div>
@@ -1343,7 +1343,7 @@ output$dataSelectedStatisticsText <- renderText({
 complaintsByOperator <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(operator) %>%
-  count(name = "nSightings") %>%
+  count(name = "nSightings", sort = TRUE) %>%
   mutate(percentage = nSightings / totalComplaints * 100) %>%
   # Exclude null/NA names and anything accounting for under .7%
   # filter(percentage > .7 && !is.na(operator))
@@ -1404,7 +1404,7 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
 complaintsByBaseAirport <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(airport_base) %>%
-  count(name = "nSightings") %>%
+  count(name = "nSightings", sort = TRUE) %>%
   mutate(percentage = nSightings / totalComplaints * 100) %>%
   head(input$numberOfTopResultsToPlot)
 })
@@ -1470,8 +1470,6 @@ complaintsByOriginOrDest <- reactive({
   group_by(airport_of_interest) %>%
   # add a count of sightings per airport
   count(name = "nSightings", sort = TRUE) %>%
-  # reorder by number of sightings
-  arrange(nSightings) %>%
   # add percentages and tag whether they're within PANYNJ jurisdiction
   mutate(percentage = nSightings / totalComplaints * 100,
          port_authority_affiliate = str_detect(
