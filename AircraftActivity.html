@@ -601,7 +601,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div class="card flow bslib-card html-fill-container" data-title="Special Case" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card flow bslib-card html-fill-container" data-fill="false" data-title="Special Case" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-header"><div class="card-title html-fill-item html-fill-container">Special Case</div></div>
 <div class="card-body html-fill-item html-fill-container">
 <p>Some sources suggest that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to assume they’re all being operated as training flights by Infinity Flight group for our analysis.</p>
@@ -1411,18 +1411,18 @@ output$pltTrafficByBaseAirport <- renderPlot({
   plotFontSize()
   p <- complaintsByBaseAirport() %>%
     filter(!is.na(airport_base)) %>% # Exclude null/NA airports
-    ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
-    geom_segment(
-      linewidth = input$lineWidthSelection,
+    ggplot(
       aes(
-        color = nSightings,
-        x=reorder(airport_base, nSightings),
-        xend=airport_base,
-        y=0,
-        yend=nSightings
+        x = reorder(airport_base, nSightings),
+        xend = airport_base,
+        y = 0,
+        yend = nSightings,
+        color = nSightings
       )
     ) +
-    # geom_point(aes(size=3, color=nSightings)) +
+    geom_segment(
+      linewidth = input$lineWidthSelection
+    ) +
     coord_flip() +
     theme(
       panel.background = element_rect(fill = "gray75"),

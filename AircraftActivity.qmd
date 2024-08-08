@@ -770,18 +770,18 @@ output$pltTrafficByBaseAirport <- renderPlot({
   plotFontSize()
   p <- complaintsByBaseAirport() %>%
     filter(!is.na(airport_base)) %>% # Exclude null/NA airports
-    ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
-    geom_segment(
-      linewidth = input$lineWidthSelection,
+    ggplot(
       aes(
-        color = nSightings,
-        x=reorder(airport_base, nSightings),
-        xend=airport_base,
-        y=0,
-        yend=nSightings
+        x = reorder(airport_base, nSightings),
+        xend = airport_base,
+        y = 0,
+        yend = nSightings,
+        color = nSightings
       )
     ) +
-    # geom_point(aes(size=3, color=nSightings)) +
+    geom_segment(
+      linewidth = input$lineWidthSelection
+    ) +
     coord_flip() +
     theme(
       panel.background = element_rect(fill = "gray75"),
