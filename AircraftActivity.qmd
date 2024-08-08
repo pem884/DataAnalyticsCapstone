@@ -710,16 +710,17 @@ complaintsByOperator <- reactive({
 output$pltTrafficByNumberOfObservations <- renderPlot({
   plotFontSize()
   p <- complaintsByOperator() %>%
-  ggplot(aes(x=reorder(operator, nSightings), y=nSightings) ) +
-  geom_segment(
-    linewidth = input$lineWidthSelection,
+  ggplot(
     aes(
-      x=reorder(operator, nSightings),
-      xend=operator,
-      y=0,
-      yend=nSightings,
+      x = reorder(operator, nSightings),
+      xend = operator,
+      y = 0,
+      yend = nSightings,
       color = nSightings
     )
+  ) +
+  geom_segment(
+    linewidth = input$lineWidthSelection,
   ) +
   guides(
    color = "colorbar",
