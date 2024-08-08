@@ -53,6 +53,12 @@ sliderInput("lineWidthSelection",
             value=10
           )
 
+sliderInput("plotFontSizeSelection",
+            "Font size for text on plots",
+            min=10, max=35,
+            value=25
+          )
+
 ```
 
 # Set up environment {orientation="columns" scrolling="true"}
@@ -655,6 +661,11 @@ dataSelectedInterval <- reactive({ dataStartDate() %--% dataEndDate() })
 
 portAuthorityAirportsRegex <- "K(EWR|TEB|JFK|LGA|SWF)"
 
+
+plotFontSize <- reactive({
+  theme_set(theme_classic(base_size = input$plotFontSizeSelection))
+})
+
 filterAirnoiseComplaints <- reactive({
   airnoiseComplaints %>%
     filter(event_date %within% dataSelectedInterval())
@@ -687,6 +698,7 @@ complaintsByOperator <- reactive({
 })
 
 output$pltTrafficByNumberOfObservations <- renderPlot({
+  plotFontSize()
   p <- complaintsByOperator() %>%
   ggplot(aes(x=reorder(operator, nSightings), y=nSightings) ) +
   geom_segment(
@@ -746,6 +758,7 @@ complaintsByBaseAirport <- reactive({
 })
 
 output$pltTrafficByBaseAirport <- renderPlot({
+  plotFontSize()
   p <- complaintsByBaseAirport() %>%
   filter(!is.na(airport_base)) %>% # Exclude null/NA airports
   ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
@@ -821,6 +834,7 @@ complaintsByOriginOrDest <- reactive({
 })
 
 output$pltComplaintsByAirportOfInterest <- renderPlot({
+  plotFontSize()
   p <- complaintsByOriginOrDest() %>%
   ggplot(aes(x=reorder(airport_of_interest, nSightings),
       y=nSightings,
