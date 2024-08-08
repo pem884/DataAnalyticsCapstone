@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
 <div class="tab-content bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-scrolling="true" data-orientation="columns" aria-labelledby="tab-set-up-environment">
+<div id="set-up-environment" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="columns" data-scrolling="true" aria-labelledby="tab-set-up-environment">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
 <div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
@@ -1442,14 +1442,15 @@ output$pltTrafficByBaseAirport <- renderPlot({
       geom = "label",
       x = 3,
       y = filteredComplaintCount() / 7,
+      hjust = "right",
+      size = 6,
       label = str_glue_data(
         .x = complaintsByBaseAirport(),
         "We were unable to determine the home base of the\n",
         "aircraft involved in {sum(is.na(airport_base))}",
         " of {filteredComplaintCount()} complaints (",
         "{round(sum(is.na(airport_base)) / filteredComplaintCount() * 100)}%)"
-        ),
-      hjust = "right"
+        )
     )
   p
 })
@@ -1518,15 +1519,16 @@ output$pltComplaintsByAirportOfInterest <- renderPlot({
       geom = "label",
       x = 2,
       y = max(complaintsByOriginOrDest()$nSightings),
+      hjust = "right",
+      vjust = "bottom",
+      size = 6,
       label = str_glue_data(.x = filterAirnoiseComplaints(),
         "We were unable to determine the\n",
         "origin or destination of the aircraft\n",
         "involved in {sum(is.na(airport_of_interest))}",
         " of {filteredComplaintCount()} complaints (",
         "{round(sum(is.na(airport_of_interest)) / filteredComplaintCount() * 100)}%)"
-        ),
-      hjust = "right",
-      vjust = "bottom"
+        )
     )
   p
 })
