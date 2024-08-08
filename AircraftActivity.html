@@ -806,7 +806,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the total number of observations</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>totalComplaints <span class="ot">&lt;-</span> <span class="fu">nrow</span>(airnoiseComplaints)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>totalComplaintCount <span class="ot">&lt;-</span> <span class="fu">nrow</span>(airnoiseComplaints)</span>
 <span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(airport_of_interest, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1276,7 +1276,7 @@ airnoiseComplaints <- airnoiseComplaints %>%
   )
 
 # Get the total number of observations
-totalComplaints <- nrow(airnoiseComplaints)
+totalComplaintCount <- nrow(airnoiseComplaints)
 
 airnoiseComplaints %>% count(airport_of_interest, sort = TRUE)
 </script>
@@ -1325,15 +1325,15 @@ filterAirnoiseComplaints <- reactive({
     filter(event_date %within% dataSelectedInterval())
 })
 
-filteredComplaints <- reactive({ nrow(filterAirnoiseComplaints()) })
+filteredComplaintCount <- reactive({ nrow(filterAirnoiseComplaints()) })
 
 output$dataSelectedStatisticsText <- renderText({
   str_glue(
-    "This filter results in a total of {filteredComplaints()} ",
-    "observations, during {dayCount} days.",
+    "This filter returns {filteredComplaintCount()} of the original {totalComplaintCount} ",
+    "observations, encompassing {dayCount} days.",
     "The result is an average of {avgReports} reports per day.",
     dayCount = dataSelectedInterval() / days(1),
-    avgReports = round(filteredComplaints() / dayCount, digits = 1)
+    avgReports = round(filteredComplaintCount() / dayCount, digits = 1)
   )
 })
 
@@ -1344,7 +1344,7 @@ complaintsByOperator <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(operator) %>%
   count(name = "nSightings", sort = TRUE) %>%
-  mutate(percentage = nSightings / totalComplaints * 100) %>%
+  mutate(percentage = nSightings / filteredComplaintCount() * 100) %>%
   head(input$numberOfTopResultsToPlot)
 })
 
@@ -1403,7 +1403,7 @@ complaintsByBaseAirport <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(airport_base) %>%
   count(name = "nSightings", sort = TRUE) %>%
-  mutate(percentage = nSightings / totalComplaints * 100) %>%
+  mutate(percentage = nSightings / filteredComplaintCount() * 100) %>%
   head(input$numberOfTopResultsToPlot)
 })
 
@@ -1447,13 +1447,13 @@ output$pltTrafficByBaseAirport <- renderPlot({
     annotate(
       geom = "label",
       x = 3,
-      y = totalComplaints / 7,
+      y = filteredComplaintCount() / 7,
       label = str_glue_data(
         .x = complaintsByBaseAirport(),
         "We were unable to determine the home base of the\n",
         "aircraft involved in {sum(is.na(airport_base))}",
-        " of {totalComplaints} complaints (",
-        "{round(sum(is.na(airport_base)) / totalComplaints * 100)}%)"
+        " of {filteredComplaintCount()} complaints (",
+        "{round(sum(is.na(airport_base)) / filteredComplaintCount() * 100)}%)"
         ),
       hjust = "right"
     )
@@ -1469,7 +1469,7 @@ complaintsByOriginOrDest <- reactive({
   # add a count of sightings per airport
   count(name = "nSightings", sort = TRUE) %>%
   # add percentages and tag whether they're within PANYNJ jurisdiction
-  mutate(percentage = nSightings / totalComplaints * 100,
+  mutate(percentage = nSightings / filteredComplaintCount() * 100,
          port_authority_affiliate = str_detect(
            airport_of_interest,
            portAuthorityAirportsRegex,
@@ -1531,8 +1531,8 @@ output$pltComplaintsByAirportOfInterest <- renderPlot({
         "We were unable to determine the\n",
         "origin or destination of the aircraft\n",
         "involved in {sum(is.na(airport_of_interest))}",
-        " of {totalComplaints} complaints (",
-        "{round(sum(is.na(airport_of_interest)) / totalComplaints * 100)}%)"
+        " of {filteredComplaintCount()} complaints (",
+        "{round(sum(is.na(airport_of_interest)) / filteredComplaintCount() * 100)}%)"
         ),
       hjust = "right",
       vjust = "bottom"
