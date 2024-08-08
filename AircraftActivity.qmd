@@ -105,7 +105,7 @@ Export the complaint database from airnoise.io in CSV format. If it is zipped, i
 #| code-fold: true
 #| code-summary: "Code: Import CSV with complaint data"
 
-anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-06-24.zip'
+anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-08-08.zip'
 
 airnoiseComplaints <- read_csv(anCsvFilesPath)
 

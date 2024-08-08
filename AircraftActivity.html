@@ -150,7 +150,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="cell card-body html-fill-item html-fill-container" data-context="data">
 <details class="code-fold">
 <summary>Code: Import CSV with complaint data</summary>
-<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>anCsvFilesPath <span class="ot">&lt;-</span> <span class="st">'E:</span><span class="sc">\\</span><span class="st">Database</span><span class="sc">\\</span><span class="st">airnoise_complaints_2024-06-24.zip'</span></span>
+<div class="sourceCode cell-code html-fill-item html-fill-container" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>anCsvFilesPath <span class="ot">&lt;-</span> <span class="st">'E:</span><span class="sc">\\</span><span class="st">Database</span><span class="sc">\\</span><span class="st">airnoise_complaints_2024-08-08.zip'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(anCsvFilesPath)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -378,20 +378,20 @@ grid-auto-rows: minmax(0, 1fr);">
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(operator, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout html-fill-item html-fill-container">
-<pre><code># A tibble: 492 × 2
+<pre><code># A tibble: 708 × 2
    operator                              n
    &lt;chr&gt;                             &lt;int&gt;
- 1 SOLBERG AVIATION CO INC             123
- 2 INFINITY FLIGHT GROUP LLC           102
- 3 AMERIFLYERS OF TEXAS INC             98
- 4 RTD AVIATION LLC                     81
- 5 BLUE SKY AVIATION ASSOCIATION INC    72
- 6 MUSTANG SALLY AVIATION LLC           58
- 7 RARITAN VALLEY FLYING SCHOOL         35
- 8 SOLBERG AVN CO INC                   32
- 9 SOMERSET AIR SERVICE INC             30
-10 Atp Flight School                    28
-# ℹ 482 more rows</code></pre>
+ 1 SOLBERG AVIATION CO INC             200
+ 2 AMERIFLYERS OF TEXAS INC            188
+ 3 INFINITY FLIGHT GROUP LLC           127
+ 4 RTD AVIATION LLC                    115
+ 5 BLUE SKY AVIATION ASSOCIATION INC   105
+ 6 MUSTANG SALLY AVIATION LLC           85
+ 7 SOLBERG AVN CO INC                   59
+ 8 SOMERSET AIR SERVICE INC             53
+ 9 RARITAN VALLEY FLYING SCHOOL         48
+10 Mountain Air Cargo                   43
+# ℹ 698 more rows</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -438,7 +438,7 @@ grid-auto-rows: minmax(0, 1fr);">
 11 unknown  THOMAS H LEE CAPITAL LLC            NJ    TETERBORO           1
 12 unknown  TVPX AIRCRAFT SOLUTIONS INC TRUSTEE UT    NORTH SALT LAKE     2
 13 unknown  WHEELS UP PARTNERS LLC              NY    NEW YORK            1
-14 unknown  &lt;NA&gt;                                &lt;NA&gt;  &lt;NA&gt;                9</code></pre>
+14 unknown  &lt;NA&gt;                                &lt;NA&gt;  &lt;NA&gt;               17</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -470,8 +470,8 @@ grid-auto-rows: minmax(0, 1fr);">
 <pre><code># A tibble: 2 × 4
   operator                state city                   n
   &lt;chr&gt;                   &lt;fct&gt; &lt;fct&gt;              &lt;int&gt;
-1 SOLBERG AVIATION CO INC NJ    WHITEHOUSE STATION   123
-2 SOLBERG AVN CO INC      NJ    WHITEHOUSE STATION    32</code></pre>
+1 SOLBERG AVIATION CO INC NJ    WHITEHOUSE STATION   200
+2 SOLBERG AVN CO INC      NJ    WHITEHOUSE STATION    59</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -495,8 +495,8 @@ grid-auto-rows: minmax(0, 1fr);">
 <pre><code># A tibble: 2 × 4
   operator             state city       n
   &lt;chr&gt;                &lt;fct&gt; &lt;fct&gt;  &lt;int&gt;
-1 SVETFUL AVIATION LLC SC    CAMDEN     5
-2 SVETFUR AVIATION LLC SC    CAMDEN     7</code></pre>
+1 SVETFUL AVIATION LLC SC    CAMDEN     8
+2 SVETFUR AVIATION LLC SC    CAMDEN     8</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -520,10 +520,10 @@ grid-auto-rows: minmax(0, 1fr);">
 <pre><code># A tibble: 4 × 4
   operator                    state city           n
   &lt;chr&gt;                       &lt;fct&gt; &lt;fct&gt;      &lt;int&gt;
-1 FIELD GEORGE WALKER DBA     NJ    BEDMINSTER     5
-2 GEORGE WALKER FIELD INC     NJ    BEDMINSTER    18
-3 GEORGE WALKER FIELD INC DBA NJ    BEDMINSTER     6
-4 SOMERSET AIR SERVICE INC    NJ    BEDMINSTER    30</code></pre>
+1 FIELD GEORGE WALKER DBA     NJ    BEDMINSTER    15
+2 GEORGE WALKER FIELD INC     NJ    BEDMINSTER    34
+3 GEORGE WALKER FIELD INC DBA NJ    BEDMINSTER    10
+4 SOMERSET AIR SERVICE INC    NJ    BEDMINSTER    53</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -576,7 +576,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <pre><code># A tibble: 1 × 4
   operator                 state city        n
   &lt;chr&gt;                    &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
-1 AMERIFLYERS OF TEXAS INC TX    ADDISON    98</code></pre>
+1 AMERIFLYERS OF TEXAS INC TX    ADDISON   188</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -599,7 +599,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
 <div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div class="card flow bslib-card html-fill-container" data-title="Special Case" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card flow bslib-card html-fill-container" data-fill="false" data-title="Special Case" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-header"><div class="card-title html-fill-item html-fill-container">Special Case</div></div>
 <div class="card-body html-fill-item html-fill-container">
 <p>Some sources suggest that these aircraft from Christiansen and Mustang Sally are all being leased and/or being used for training flights by Infinity Flight Group out of TTN. SvetFur aircraft are also flying out of TTN and taxiing back to the same tiedown as Infinity aircraft. Further, SvetFur shares an agent with Mustang Sally Aviation. This seems sufficient to assume they’re all being operated as training flights by Infinity Flight group for our analysis.</p>
@@ -620,20 +620,20 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="sourceCode cell-code html-fill-item html-fill-container" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(operator, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout html-fill-item html-fill-container">
-<pre><code># A tibble: 492 × 2
+<pre><code># A tibble: 708 × 2
    operator                              n
    &lt;chr&gt;                             &lt;int&gt;
- 1 SOLBERG AVIATION CO INC             123
- 2 INFINITY FLIGHT GROUP LLC           102
- 3 AMERIFLYERS OF TEXAS INC             98
- 4 RTD AVIATION LLC                     81
- 5 BLUE SKY AVIATION ASSOCIATION INC    72
- 6 MUSTANG SALLY AVIATION LLC           58
- 7 RARITAN VALLEY FLYING SCHOOL         35
- 8 SOLBERG AVN CO INC                   32
- 9 SOMERSET AIR SERVICE INC             30
-10 Atp Flight School                    28
-# ℹ 482 more rows</code></pre>
+ 1 SOLBERG AVIATION CO INC             200
+ 2 AMERIFLYERS OF TEXAS INC            188
+ 3 INFINITY FLIGHT GROUP LLC           127
+ 4 RTD AVIATION LLC                    115
+ 5 BLUE SKY AVIATION ASSOCIATION INC   105
+ 6 MUSTANG SALLY AVIATION LLC           85
+ 7 SOLBERG AVN CO INC                   59
+ 8 SOMERSET AIR SERVICE INC             53
+ 9 RARITAN VALLEY FLYING SCHOOL         48
+10 Mountain Air Cargo                   43
+# ℹ 698 more rows</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -702,20 +702,20 @@ grid-auto-rows: minmax(0, 1fr);">
 <span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>airnoiseComplaints <span class="sc">%&gt;%</span> <span class="fu">count</span>(operator, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout html-fill-item html-fill-container">
-<pre><code># A tibble: 486 × 2
+<pre><code># A tibble: 701 × 2
    operator               n
    &lt;chr&gt;              &lt;int&gt;
- 1 Infinity Flt Grp     209
- 2 Solberg Avn          155
- 3 American Flyers       99
- 4 TriState Avn          81
- 5 Blue Sky Avn Assoc    72
- 6 Somerset Air Svc      59
- 7 Princeton Fl Schl     35
- 8 Atp Flight School     28
- 9 Netjets Aviation      23
-10 United Airlines       21
-# ℹ 476 more rows</code></pre>
+ 1 Infinity Flt Grp     279
+ 2 Solberg Avn          259
+ 3 American Flyers      189
+ 4 TriState Avn         115
+ 5 Somerset Air Svc     112
+ 6 Blue Sky Avn Assoc   105
+ 7 Princeton Fl Schl     48
+ 8 Mountain Air Cargo    43
+ 9 Atp Flight School     39
+10 United Airlines       34
+# ℹ 691 more rows</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -768,17 +768,17 @@ grid-auto-rows: minmax(0, 1fr);">
 <pre><code># A tibble: 11 × 2
    airport_base     n
    &lt;chr&gt;        &lt;int&gt;
- 1 &lt;NA&gt;           941
- 2 N51            238
- 3 KTTN           209
- 4 KMMU           124
- 5 47N             82
- 6 KSMQ            59
- 7 39N             35
- 8 KLDJ            26
- 9 N87             18
-10 KHPN             3
-11 KCDW             1</code></pre>
+ 1 &lt;NA&gt;          1563
+ 2 N51            380
+ 3 KTTN           279
+ 4 KMMU           216
+ 5 47N            116
+ 6 KSMQ           112
+ 7 39N             48
+ 8 KLDJ            42
+ 9 N87             21
+10 KCDW             6
+11 KHPN             3</code></pre>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -812,19 +812,19 @@ grid-auto-rows: minmax(0, 1fr);">
 <pre><code># A tibble: 15 × 2
    airport_of_interest     n
    &lt;chr&gt;               &lt;int&gt;
- 1 &lt;NA&gt;                  821
- 2 N51                   238
- 3 KTTN                  209
- 4 KMMU                  157
- 5 47N                    82
- 6 KSMQ                   59
- 7 KTEB                   47
- 8 KEWR                   38
- 9 39N                    35
-10 KLDJ                   26
-11 N87                    18
-12 KHPN                    3
-13 KCDW                    1
+ 1 &lt;NA&gt;                 1396
+ 2 N51                   380
+ 3 KTTN                  279
+ 4 KMMU                  258
+ 5 47N                   116
+ 6 KSMQ                  112
+ 7 KEWR                   68
+ 8 KTEB                   55
+ 9 39N                    48
+10 KLDJ                   42
+11 N87                    21
+12 KCDW                    6
+13 KHPN                    3
 14 KJFK                    1
 15 KLGA                    1</code></pre>
 </div>
@@ -1006,7 +1006,7 @@ library(shiny)      # For interactive plots
 </script>
  
 <script type="application/shiny-prerendered" data-context="data">
-anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-06-24.zip'
+anCsvFilesPath <- 'E:\\Database\\airnoise_complaints_2024-08-08.zip'
 
 airnoiseComplaints <- read_csv(anCsvFilesPath)
 
