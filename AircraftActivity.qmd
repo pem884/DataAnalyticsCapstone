@@ -23,8 +23,6 @@ library(directlabels)
 library(tidyverse)
 library(RCurl)      # For downloading the FAA database
 library(shiny)      # For interactive plots
-library(svglite)
-library(svgPanZoom)
 
 ```
 
@@ -91,8 +89,6 @@ library(directlabels)
 library(tidyverse)
 library(RCurl)      # For downloading the FAA database
 library(shiny)      # For interactive plots
-library(svglite)
-library(svgPanZoom)
 
 ```
 
