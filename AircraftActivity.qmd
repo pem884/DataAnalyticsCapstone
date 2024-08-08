@@ -707,49 +707,49 @@ complaintsByOperator <- reactive({
 output$pltTrafficByNumberOfObservations <- renderPlot({
   plotFontSize()
   p <- complaintsByOperator() %>%
-  ggplot(
-    aes(
-      x = reorder(operator, nSightings),
-      xend = operator,
-      y = 0,
-      yend = nSightings,
-      color = nSightings
+    ggplot(
+      aes(
+        x = reorder(operator, nSightings),
+        xend = operator,
+        y = 0,
+        yend = nSightings,
+        color = nSightings
+      )
+    ) +
+    geom_segment(
+      linewidth = input$lineWidthSelection,
+    ) +
+    guides(
+    color = "colorbar",
+    linewidth = "legend"
+    ) +
+    # geom_point(size=3, aes(color=nSightings)) +
+    coord_flip() +
+    theme(
+      panel.background = element_rect(fill = "gray75"),
+      # panel.grid = element_line(color = "black"),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      legend.position = "inside",
+      legend.position.inside = c(.95, .05),
+      legend.justification = c(1, 0),
+      legend.key = element_rect(fill = NA),
+    ) +
+    scale_color_viridis_c(
+      name = NULL,
+      option = "viridis",
+      direction = 1
+    ) +
+    xlab("Operator") +
+    ylab("# of complaints") +
+    labs(
+      title = "Number of Sightings by Operator",
+      subtitle = str_glue_data(
+        .x = filterAirnoiseComplaints(),
+        "Top Operators {min(event_date)} - {max(event_date)}"
+      )
     )
-  ) +
-  geom_segment(
-    linewidth = input$lineWidthSelection,
-  ) +
-  guides(
-   color = "colorbar",
-   linewidth = "legend"
-   ) +
-  # geom_point(size=3, aes(color=nSightings)) +
-  coord_flip() +
-  theme(
-    panel.background = element_rect(fill = "gray75"),
-    # panel.grid = element_line(color = "black"),
-    panel.grid.minor.y = element_blank(),
-    panel.grid.major.y = element_blank(),
-    legend.position = "inside",
-    legend.position.inside = c(.95, .05),
-    legend.justification = c(1, 0),
-    legend.key = element_rect(fill = NA),
-  ) +
-  scale_color_viridis_c(
-    name = NULL,
-    option = "viridis",
-    direction = 1
-  ) +
-  xlab("Operator") +
-  ylab("# of complaints") +
-  labs(
-    title = "Number of Sightings by Operator",
-    subtitle = str_glue_data(
-      .x = filterAirnoiseComplaints(),
-      "Top Operators {min(event_date)} - {max(event_date)}"
-    )
-  )
-  p
+    p
 })
 
 ```
@@ -769,8 +769,8 @@ complaintsByBaseAirport <- reactive({
 output$pltTrafficByBaseAirport <- renderPlot({
   plotFontSize()
   p <- complaintsByBaseAirport() %>%
-  filter(!is.na(airport_base)) %>% # Exclude null/NA airports
-  ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
+    filter(!is.na(airport_base)) %>% # Exclude null/NA airports
+    ggplot( aes(x=reorder(airport_base, nSightings), y=nSightings) ) +
     geom_segment(
       linewidth = input$lineWidthSelection,
       aes(
@@ -844,60 +844,60 @@ complaintsByOriginOrDest <- reactive({
 output$pltComplaintsByAirportOfInterest <- renderPlot({
   plotFontSize()
   p <- complaintsByOriginOrDest() %>%
-  ggplot(aes(x=reorder(airport_of_interest, nSightings),
-      y=nSightings,
-      color=!port_authority_affiliate
-      )
-    ) +
-  coord_flip() +
-  geom_segment(
-    linewidth = input$lineWidthSelection,
-    aes(
-      x = ,
-      xend = airport_of_interest,
-      y = 0,
-      yend = nSightings
-    ),
-    show.legend = FALSE
-    ) +
-  # geom_point(size=4) +
-  theme(
-    panel.background = element_rect(fill = "darkgray"),
-    panel.grid.minor.y = element_blank(),
-    panel.grid.major.y = element_blank(),
-    legend.position = "inside",
-    legend.position.inside = c(.95, .5),
-    legend.justification = c(1, .5),
-    legend.key = element_rect(fill = NA),
-    ) +
-  scale_color_viridis_d(
-    name = NULL,
-    option = "viridis",
-    direction = -1,
-    labels = c("PANYNJ affiliate", "not affiliated")
-    ) +
-  xlab("Flying to or from") +
-  ylab("# of complaints") +
-  labs(
-    title = "Number of Sightings by Origin or Destination Airport",
-    subtitle = str_glue_data(
-      .x = filterAirnoiseComplaints(),
-      "Top Airports {min(event_date)} - {max(event_date)}")
-    ) +
-  annotate(
-    geom = "label",
-    x = 2,
-    y = max(complaintsByOriginOrDest()$nSightings),
-    label = str_glue_data(.x = filterAirnoiseComplaints(),
-      "We were unable to determine the\n",
-      "origin or destination of the aircraft\n",
-      "involved in {sum(is.na(airport_of_interest))}",
-      " of {totalComplaints} complaints (",
-      "{round(sum(is.na(airport_of_interest)) / totalComplaints * 100)}%)"
+    ggplot(aes(x=reorder(airport_of_interest, nSightings),
+        y=nSightings,
+        color=!port_authority_affiliate
+        )
+      ) +
+    coord_flip() +
+    geom_segment(
+      linewidth = input$lineWidthSelection,
+      aes(
+        x = ,
+        xend = airport_of_interest,
+        y = 0,
+        yend = nSightings
       ),
-    hjust = "right",
-    vjust = "bottom"
-  )
+      show.legend = FALSE
+      ) +
+    # geom_point(size=4) +
+    theme(
+      panel.background = element_rect(fill = "darkgray"),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      legend.position = "inside",
+      legend.position.inside = c(.95, .5),
+      legend.justification = c(1, .5),
+      legend.key = element_rect(fill = NA),
+      ) +
+    scale_color_viridis_d(
+      name = NULL,
+      option = "viridis",
+      direction = -1,
+      labels = c("PANYNJ affiliate", "not affiliated")
+      ) +
+    xlab("Flying to or from") +
+    ylab("# of complaints") +
+    labs(
+      title = "Number of Sightings by Origin or Destination Airport",
+      subtitle = str_glue_data(
+        .x = filterAirnoiseComplaints(),
+        "Top Airports {min(event_date)} - {max(event_date)}")
+      ) +
+    annotate(
+      geom = "label",
+      x = 2,
+      y = max(complaintsByOriginOrDest()$nSightings),
+      label = str_glue_data(.x = filterAirnoiseComplaints(),
+        "We were unable to determine the\n",
+        "origin or destination of the aircraft\n",
+        "involved in {sum(is.na(airport_of_interest))}",
+        " of {totalComplaints} complaints (",
+        "{round(sum(is.na(airport_of_interest)) / totalComplaints * 100)}%)"
+        ),
+      hjust = "right",
+      vjust = "bottom"
+    )
   p
 })
 
