@@ -47,6 +47,14 @@ textOutput('dataSelectedStatisticsText')
 
 br()
 
+sliderInput("numberOfTopResultsToPlot",
+            "Only show the top 'n' results, where n is:",
+            min=5, max=15,
+            value=10
+          )
+
+br()
+
 sliderInput("lineWidthSelection",
             "Width of bars for plots",
             min=1, max=15,
@@ -691,10 +699,12 @@ output$dataSelectedStatisticsText <- renderText({
 complaintsByOperator <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(operator) %>%
-  count(name = "nSightings") %>%
+  count(name = "nSightings", sort = TRUE) %>%
   mutate(percentage = nSightings / totalComplaints * 100) %>%
   # Exclude null/NA names and anything accounting for under .7%
-  filter(percentage > .7 && !is.na(operator))
+  # filter(percentage > .7 && !is.na(operator))
+  filter( !is.na(operator) ) %>%
+  head(input$numberOfTopResultsToPlot)
 })
 
 output$pltTrafficByNumberOfObservations <- renderPlot({
@@ -753,8 +763,9 @@ output$pltTrafficByNumberOfObservations <- renderPlot({
 complaintsByBaseAirport <- reactive({
   filterAirnoiseComplaints() %>%
   group_by(airport_base) %>%
-  count(name = "nSightings") %>%
-  mutate(percentage = nSightings / totalComplaints * 100)
+  count(name = "nSightings", sort = TRUE) %>%
+  mutate(percentage = nSightings / totalComplaints * 100) %>%
+  head(input$numberOfTopResultsToPlot)
 })
 
 output$pltTrafficByBaseAirport <- renderPlot({
@@ -820,8 +831,6 @@ complaintsByOriginOrDest <- reactive({
   group_by(airport_of_interest) %>%
   # add a count of sightings per airport
   count(name = "nSightings", sort = TRUE) %>%
-  # reorder by number of sightings
-  arrange(nSightings) %>%
   # add percentages and tag whether they're within PANYNJ jurisdiction
   mutate(percentage = nSightings / totalComplaints * 100,
          port_authority_affiliate = str_detect(
@@ -830,7 +839,8 @@ complaintsByOriginOrDest <- reactive({
            ),
          ) %>%
   # remove rows where we don't know about the airport
-  filter(!is.na(airport_of_interest))
+  filter(!is.na(airport_of_interest)) %>%
+  head(input$numberOfTopResultsToPlot)
 })
 
 output$pltComplaintsByAirportOfInterest <- renderPlot({
