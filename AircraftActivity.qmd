@@ -47,22 +47,28 @@ br()
 
 sliderInput("numberOfTopResultsToPlot",
             "Only show the top 'n' results, where n is:",
-            min=5, max=15,
-            value=10
+            min = 5, max = 15,
+            step = 2,
+            value = 11,
+            ticks = FALSE
           )
 
 br()
 
 sliderInput("lineWidthSelection",
             "Width of bars for plots",
-            min=1, max=15,
-            value=10
+            min = 5, max = 25,
+            step = 5,
+            value = 10,
+            ticks = FALSE
           )
 
 sliderInput("plotFontSizeSelection",
             "Font size for text on plots",
-            min=10, max=35,
-            value=25
+            min = 10, max = 35,
+            step = 5,
+            value = 25,
+            ticks = FALSE
           )
 
 ```
